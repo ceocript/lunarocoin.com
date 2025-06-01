@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUNARO | Pré-Venda Cyberpunk na Solana</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom CSS for cyberpunk aesthetics */
+        :root {
+            --neon-blue: #0ff; /* Cyan */
+            --neon-purple: #f0f; /* Fuchsia */
+            --neon-green: #0f0; /* Lime */
+            --dark-bg: #0a0a0a; /* Very dark gray */
+            --darker-bg: #050505; /* Even darker */
+            --red-alert: #f00; /* Red for warnings */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--darker-bg);
+            color: #e0e0e0; /* Light gray for readability */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Oxanium', monospace;
+            color: var(--neon-blue);
+            text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
+        }
+
+        .neon-text-blue {
+            color: var(--neon-blue);
+            text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
+        }
+        .neon-text-purple {
+            color: var(--neon-purple);
+            text-shadow: 0 0 5px var(--neon-purple), 0 0 10px var(--neon-purple);
+        }
+        .neon-text-green {
+            color: var(--neon-green);
+            text-shadow: 0 0 5px var(--neon-green), 0 0 10px var(--neon-green);
+        }
+
+        .neon-button {
+            background-color: var(--neon-blue);
+            color: var(--darker-bg);
+            font-family: 'Oxanium', monospace;
+            text-shadow: none;
+            box-shadow: 0 0 10px var(--neon-blue);
+            transition: all 0.3s ease-in-out;
+            border-radius: 0.75rem; /* rounded-xl */
+        }
+        .neon-button:hover:not(:disabled) {
+            background-color: #0ff; /* Brighter cyan */
+            box-shadow: 0 0 15px #0ff, 0 0 25px #0ff;
+            transform: translateY(-2px);
+        }
+        .neon-button:disabled {
+            background-color: #555;
+            box-shadow: none;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .card-bg {
+            background-color: var(--dark-bg);
+            border: 1px solid rgba(0, 255, 255, 0.2); /* Light neon border */
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+            border-radius: 1rem; /* rounded-2xl */
+        }
+
+        /* Grid background effect */
+        .grid-background {
+            background-image: 
+                linear-gradient(to right, rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: center center;
+        }
+
+        /* Progress bar custom styling */
+        .progress-bar-container {
+            background-color: #333;
+            border-radius: 9999px; /* Full rounded */
+            height: 1.5rem; /* h-6 */
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background-color: var(--neon-green);
+            border-radius: 9999px;
+            transition: width 0.5s ease-in-out;
+            box-shadow: 0 0 8px var(--neon-green);
+        }
+
+        /* Custom scrollbar for cyberpunk feel */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--darker-bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--neon-blue);
+            border-radius: 5px;
+            box-shadow: 0 0 5px var(--neon-blue);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0ff;
+        }
+
+        /* Basic animation for roadmap items */
+        .roadmap-item {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .roadmap-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px var(--neon-purple);
+        }
+
+        /* Video Placeholder Styling */
+        .video-placeholder {
+            background-color: #1a1a1a;
+            border: 2px solid var(--neon-blue);
+            border-radius: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            color: var(--neon-blue);
+            text-shadow: 0 0 5px var(--neon-blue);
+            height: 300px; /* Default height */
+        }
+        @media (min-width: 768px) {
+            .video-placeholder {
+                height: 400px; /* Larger on desktop */
+            }
+        }
+
+        /* Chatbot specific styles */
+        .chat-window {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            background-color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+        .chat-message {
+            margin-bottom: 0.75rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            max-width: 85%;
+        }
+        .chat-message.user {
+            background-color: rgba(0, 255, 255, 0.1);
+            color: var(--neon-blue);
+            margin-left: auto;
+            text-align: right;
+        }
+        .chat-message.ai {
+            background-color: rgba(240, 0, 240, 0.1);
+            color: var(--neon-purple);
+            margin-right: auto;
+            text-align: left;
+        }
+        .chat-input-container {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .chat-input {
+            flex-grow: 1;
+            padding: 0.75rem;
+            background-color: #333;
+            border: 1px solid var(--neon-green);
+            border-radius: 0.75rem;
+            color: #e0e0e0;
+            outline: none;
+        }
+        .chat-input:focus {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 8px var(--neon-green);
+        }
+
+        /* Partner/Exchange Logos */
+        .partner-logo {
+            filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.5)); /* Default neon-blue glow */
+            transition: all 0.3s ease-in-out;
+        }
+        .partner-logo:hover {
+            filter: drop-shadow(0 0 20px var(--neon-purple)) brightness(1.2);
+            transform: scale(1.05);
+        }
+
+        /* Specific colors for some logos if desired */
+        .partner-logo.solana { filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.7)); } /* Brighter cyan */
+        .partner-logo.instagram { filter: drop-shadow(0 0 15px rgba(240, 0, 240, 0.7)); } /* Fuchsia */
+        .partner-logo.facebook { filter: drop-shadow(0 0 15px rgba(0, 0, 255, 0.7)); } /* Blue */
+        .partner-logo.telegram { filter: drop-shadow(0 0 15px rgba(0, 255, 0, 0.7)); } /* Green */
+        .partner-logo.twitter { filter: drop-shadow(0 0 15px rgba(0, 172, 238, 0.7)); } /* Twitter Blue */
+
+        /* FAQ Accordion Styles */
+        .faq-question {
+            background-color: #1a1a1a;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .faq-question:hover {
+            background-color: #2a2a2a;
+        }
+        .faq-question.active {
+            background-color: #2a2a2a;
+            border-color: var(--neon-green);
+        }
+        .faq-answer {
+            background-color: #0d0d0d;
+            border: 1px solid rgba(240, 0, 240, 0.2);
+            border-top: none;
+            border-radius: 0 0 0.75rem 0.75rem;
+            padding: 1rem;
+            margin-top: -0.5rem; /* Overlap with question border */
+            display: none;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .faq-answer.open {
+            display: block; /* Controlled by JS for max-height transition */
+        }
+    </style>
+</head>
+<body class="grid-background">
+    <header class="bg-black bg-opacity-70 backdrop-blur-sm p-4 md:p-6 shadow-lg fixed w-full z-50 rounded-b-xl">
+        <nav class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <img src="https://bafybeif6blu6nlkivm2gu7z4dzblbrvobwjct7vn75fjyc4kzyx6xjokoq.ipfs.dweb.link/Lunaro3131.png" alt="LUNARO Logo" class="h-12 w-auto">
+            </div>
+            <ul class="flex flex-wrap justify-center md:space-x-8 space-x-4">
+                <li><a href="#about" class="text-gray-300 hover:text-white hover:neon-text-blue transition duration-300">Sobre</a></li>
+                <li><a href="#tokenomics" class="text-gray-300 hover:text-white hover:neon-text-purple transition duration-300">Tokenomics</a></li>
+                <li><a href="#roadmap" class="text-gray-300 hover:text-white hover:neon-text-green transition duration-300">Roadmap</a></li>
+                <li><a href="#partners" class="text-gray-300 hover:text-white hover:neon-text-blue transition duration-300">Parceiros</a></li>
+                <li><a href="#exchanges" class="text-gray-300 hover:text-white hover:neon-text-purple transition duration-300">Exchanges</a></li>
+                <li><a href="#whitepaper" class="text-gray-300 hover:text-white hover:neon-text-green transition duration-300">Whitepaper</a></li>
+                <li><a href="#faq" class="text-gray-300 hover:text-white hover:neon-text-blue transition duration-300">FAQ</a></li>
+                <li><a href="#gallery" class="text-gray-300 hover:text-white hover:neon-text-purple transition duration-300">Galeria</a></li>
+                <li><a href="#newsletter" class="text-gray-300 hover:text-white hover:neon-text-green transition duration-300">Newsletter</a></li>
+                <li><a href="#audit-results" class="text-gray-300 hover:text-white hover:neon-text-blue transition duration-300">Auditoria</a></li>
+                <li>
+                    <button id="connectWalletBtnNav" class="neon-button px-4 py-2 rounded-xl text-sm md:text-base">
+                        Conectar Carteira
+                    </button>
+                    <span id="walletAddressDisplayNav" class="hidden text-gray-300 text-sm md:text-base"></span>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="pt-24 pb-12">
+        <section id="hero" class="container mx-auto px-4 py-16 text-center">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                LUNARO: <span class="neon-text-purple">Energia da Atenção</span> em Valor Real
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-400 mb-10 max-w-3xl mx-auto">
+                Uma moeda alimentada pela luz da Lua, que transforma a energia da atenção em valor real. Mineração + Staking + Recompensas Gamificadas em um ecossistema DeFi dark-futurista.
+            </p>
+
+            <div class="video-placeholder w-full max-w-4xl mx-auto mb-10 rounded-xl">
+                <iframe 
+                    width="100%" 
+                    height="100%" 
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" 
+                    allowfullscreen
+                    class="rounded-xl"
+                ></iframe>
+            </div>
+
+            <div class="bg-black bg-opacity-50 p-6 rounded-2xl max-w-2xl mx-auto mb-10 card-bg">
+                <h3 class="text-2xl md:text-3xl neon-text-green mb-4">Pré-Venda Começa Em:</h3>
+                <div id="countdown" class="flex justify-center space-x-4 md:space-x-8 text-4xl md:text-6xl font-bold neon-text-blue">
+                    <div><span id="days">00</span><br><span class="text-base md:text-lg text-gray-500">DIAS</span></div>
+                    <div><span id="hours">00</span><br><span class="text-base md:text-lg text-gray-500">HORAS</span></div>
+                    <div><span id="minutes">00</span><br><span class="text-base md:text-lg text-gray-500">MINUTOS</span></div>
+                    <div><span id="seconds">00</span><br><span class="text-base md:text-lg text-gray-500">SEGUNDOS</span></div>
+                </div>
+            </div>
+
+            <div id="presale" class="bg-black bg-opacity-50 p-6 rounded-2xl max-w-3xl mx-auto card-bg">
+                <h3 class="text-2xl md:text-3xl neon-text-purple mb-4">Progresso da Pré-Venda</h3>
+                <div class="flex justify-between text-lg mb-2">
+                    <span class="neon-text-green">Soft Cap: 30.000 USDC</span>
+                    <span class="neon-text-blue">Hard Cap: 150.000 USDC</span>
+                </div>
+                <div class="progress-bar-container mb-4">
+                    <div id="progressBarFill" class="progress-bar-fill" style="width: 0%;"></div>
+                </div>
+                <div class="flex justify-between text-xl font-bold">
+                    <span id="raisedAmount" class="neon-text-green">0 USDC Arrecadados</span>
+                    <span id="tokensRemaining" class="neon-text-blue">10,000,000 LNR Restantes</span>
+                </div>
+                
+                <p id="walletStatus" class="mt-4 text-lg text-gray-400">Status da Carteira: <span class="neon-text-purple">Desconectada</span></p>
+                <p id="connectedWalletAddress" class="text-sm text-gray-500 break-words hidden"></p>
+
+                <button id="participateButton" class="neon-button mt-8 px-8 py-4 text-xl font-bold">
+                    Conectar Carteira para Participar
+                </button>
+                <p class="text-sm text-gray-500 mt-4">
+                    <span class="neon-text-green">Bônus de 10%</span> para compras nas primeiras 24h!
+                    <span class="neon-text-purple">NFT exclusivo</span> para os 100 primeiros compradores.
+                </p>
+            </div>
+        </section>
+
+        <section id="social-wallet" class="container mx-auto px-4 py-16">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-12">Login Social & Sua Carteira <span class="neon-text-blue">LUNARO</span></h2>
+            <div class="card-bg p-8 rounded-2xl max-w-4xl mx-auto text-center">
+                <p class="text-lg text-gray-300 mb-6">
+                    Conecte-se com suas contas sociais e de jogos favoritas para criar uma carteira LUNARO vinculada e gerenciar seus tokens.
+                </p>
+
+                <h3 class="text-2xl font-bold neon-text-purple mb-4">Conectar com:</h3>
+                <div class="flex flex-wrap justify-center gap-6 mb-8">
+                    <button onclick="connectSocialWallet('Google')" class="neon-button flex items-center px-6 py-3 text-lg">
+                        <i class="fab fa-google mr-2"></i> Google
+                    </button>
+                    <button onclick="connectSocialWallet('Twitch')" class="neon-button flex items-center px-6 py-3 text-lg">
+                        <i class="fab fa-twitch mr-2"></i> Twitch
+                    </button>
+                    <button onclick="connectSocialWallet('Facebook')" class="neon-button flex items-center px-6 py-3 text-lg">
+                        <i class="fab fa-facebook mr-2"></i> Facebook
+                    </button>
+                    <button onclick="connectSocialWallet('Microsoft')" class="neon-button flex items-center px-6 py-3 text-lg">
+                        <i class="fab fa-microsoft mr-2"></i> Microsoft
+                    </button>
+                    <button onclick="connectSocialWallet('GitHub')" class="neon-button flex items-center px-6 py-3 text-lg">
+                        <i class="fab fa-github mr-2"></i> GitHub
+                    </button>
+                    <button onclick="connectSocialWallet('Instagram')" class="neon-button flex items-center px-6 py-3 text-lg">
+                        <i class="fab fa-instagram mr-2"></i> Instagram
+                    </button>
+                    <button onclick="connectSocialWallet('X (Twitter)')" class="neon-button flex items-center px-6 py-3 text-lg">
+                        <i class="fab fa-twitter mr-2"></i> X (Twitter)
+                    </button>
+                    <button onclick="connectSocialWallet('Discord')" class="neon-button flex items-center px-6 py-3 text-lg">
+                        <i class="fab fa-discord mr-2"></i> Discord
+                    </button>
+                    <button onclick="connectSocialWallet('LinkedIn')" class="neon-button flex items-center px-6 py-3 text-lg">
+                        <i class="fab fa-linkedin mr-2"></i> LinkedIn
+                    </button>
+                    <button onclick="connectSocialWallet('TikTok')" class="neon-button flex items-center px-6 py-3 text-lg">
+                        <i class="fab fa-tiktok mr-2"></i> TikTok
+                    </button>
+                    <button onclick="connectSocialWallet('Steam')" class="neon-button flex items-center px-6 py-3 text-lg">
+                        <i class="fab fa-steam-symbol mr-2"></i> Steam
+                    </button>
+                    <button onclick="connectSocialWallet('Epic Games')" class="neon-button flex items-center px-6 py-3 text-lg">
+                        <i class="fas fa-gamepad mr-2"></i> Epic Games
+                    </button>
+                    <button onclick="connectSocialWallet('Riot Games')" class="neon-button flex items-center px-6 py-3 text-lg">
+                        <i class="fas fa-dice mr-2"></i> Riot Games
+                    </button>
+                </div>
+
+                <div id="socialWalletArea" class="hidden mt-8 p-6 bg-gray-800 rounded-xl border border-neon-green shadow-lg shadow-neon-green/20">
+                    <h4 class="text-xl font-bold neon-text-green mb-4">Sua Carteira LUNARO Vinculada:</h4>
+                    <p class="text-lg text-gray-300 break-words">Endereço: <span id="socialWalletAddress" class="neon-text-blue"></span></p>
+                    <p class="text-lg text-gray-300">Saldo LUNARO: <span id="socialWalletBalance" class="neon-text-blue">0 LNR</span></p>
+
+                    <div class="mt-6 text-left">
+                        <h4 class="text-xl font-bold neon-text-purple mb-3">Enviar LUNARO:</h4>
+                        <label for="recipientAddress" class="block text-gray-300 mb-2">Endereço do Destinatário:</label>
+                        <input type="text" id="recipientAddress" class="w-full p-3 bg-gray-700 border border-neon-blue text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neon-blue mb-4" placeholder="Endereço da carteira ou corretora">
+                        
+                        <label for="sendAmount" class="block text-gray-300 mb-2">Quantidade de LUNARO:</label>
+                        <input type="number" id="sendAmount" class="w-full p-3 bg-gray-700 border border-neon-blue text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neon-blue mb-4" placeholder="0.00 LNR" min="0.01" step="0.01">
+                        
+                        <button onclick="sendLunaro()" class="neon-button px-6 py-3 text-lg w-full">Enviar LUNARO (Simulado)</button>
+                    </div>
+                </div>
+
+                <p class="text-gray-500 text-sm mt-8">
+                    <span style="color: var(--red-alert);">Aviso:</span> Esta é uma simulação. Em um ambiente real, a criação e gestão de carteiras vinculadas a logins sociais exigem um serviço de Wallet as a Service (WaaS) ou uma infraestrutura de custódia/não-custódia robusta e segura. Suas chaves privadas nunca devem ser expostas no frontend.
+                </p>
+            </div>
+        </section>
+
+        <section id="how-to-buy" class="container mx-auto px-4 py-16">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-12">Como Comprar <span class="neon-text-green">LNR</span></h2>
+            <div class="card-bg p-8 rounded-2xl max-w-4xl mx-auto text-center">
+                <p class="text-lg text-gray-300 mb-6">
+                    Para participar da pré-venda de LUNARO, você pode usar **USDC** ou **USDT** diretamente da sua carteira Solana.
+                </p>
+                <p class="text-lg text-gray-300 mb-8">
+                    Se você não possui criptomoedas, pode adquiri-las utilizando métodos de pagamento fiat (Boleto, Cartão de Crédito, PIX, etc.) através de serviços de **rampa de acesso (fiat on-ramp)**.
+                </p>
+
+                <h3 class="text-2xl font-bold neon-text-blue mb-4">Compre Cripto Direto Aqui (via Onramper):</h3>
+                <div class="w-full h-[600px] md:h-[700px] bg-gray-800 rounded-xl overflow-hidden border border-neon-purple shadow-lg shadow-neon-purple/20 mb-8">
+                    <iframe 
+                        src="https://buy.onramper.com/?apiKey=YOUR_ONRAMPER_API_KEY&defaultCrypto=USDC&network=SOLANA&defaultFiat=BRL&defaultAmount=200&themeName=dark" 
+                        width="100%" 
+                        height="100%" 
+                        style="border: none; border-radius: 1rem;"
+                        allow="accelerometer; autoplay; camera; gyroscope; payment"
+                        frameborder="0"
+                    ></iframe>
+                </div>
+                <p class="text-gray-500 text-sm mt-4 w-full">
+                    <span style="color: var(--red-alert);">Aviso:</span> Este é um serviço de terceiros (Onramper). Ele pode exigir KYC (verificação de identidade) e ter suas próprias taxas e restrições geográficas. Faça sua própria pesquisa (DYOR) antes de usar.
+                </p>
+
+                <h3 class="text-2xl font-bold neon-text-purple mt-12 mb-4">Passos para Comprar com Fiat (Geral):</h3>
+                <ol class="list-decimal list-inside text-left text-lg text-gray-300 space-y-3 mb-8">
+                    <li>**Adquira USDC ou USDT:** Use o serviço integrado acima ou outro provedor de rampa de acesso para comprar USDC ou USDT, enviando-os diretamente para o endereço da sua carteira Solana (Phantom, Solflare, etc.).</li>
+                    <li>**Conecte sua Carteira:** Após receber as criptomoedas, conecte sua carteira Solana ao nosso site (botão "Conectar Carteira").</li>
+                    <li>**Participe da Pré-Venda:** Use seus USDC ou USDT para comprar LNR diretamente no nosso formulário de pré-venda.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="ai-support" class="container mx-auto px-4 py-16">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-12">✨ Suporte AI LUNARO ✨</h2>
+            <div class="card-bg p-8 rounded-2xl max-w-3xl mx-auto">
+                <p class="text-lg text-gray-300 mb-6 text-center">
+                    Pergunte ao nosso bot de IA sobre LUNARO, a pré-venda, tokenomics, ou qualquer dúvida geral!
+                </p>
+                <div class="chat-window" id="chatWindow">
+                    <div class="chat-message ai">Olá! Como posso ajudar você hoje com o projeto LUNARO?</div>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" id="chatInput" class="chat-input" placeholder="Digite sua pergunta aqui...">
+                    <button id="sendChatBtn" class="neon-button px-6 py-3 text-lg">Enviar</button>
+                </div>
+                <p id="chatLoading" class="text-center text-gray-400 mt-4 hidden">Carregando resposta da IA...</p>
+            </div>
+        </section>
+
+        <section id="about" class="container mx-auto px-4 py-16">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-12">O Que é <span class="neon-text-blue">LUNARO</span>?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="card-bg p-8 rounded-2xl">
+                    <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                        LUNARO é mais do que uma criptomoeda; é um ecossistema digital pioneiro que transforma a energia da atenção humana em valor tangível na blockchain Solana. Inspirado pela mística da Lua, nosso projeto une o poder da descentralização com uma experiência gamificada e imersiva.
+                    </p>
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        Em um futuro dark-futurista, LUNARO oferece uma nova forma de interação com o DeFi, onde a participação da comunidade é recompensada e a utilidade do token LNR se estende através de múltiplos vetores.
+                    </p>
+                </div>
+                <div class="card-bg p-8 rounded-2xl flex justify-center items-center h-full">
+                    <img src="https://placehold.co/400x300/0a0a0a/0ff?text=LUNARO+Concept" alt="LUNARO Concept Art" class="rounded-lg border border-cyan-500 shadow-lg shadow-cyan-500/20">
+                </div>
+            </div>
+
+            <h3 class="text-3xl md:text-4xl text-center font-bold neon-text-purple mt-16 mb-8">Utilidade do Token LNR</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="card-bg p-6 rounded-xl flex flex-col items-center text-center">
+                    <div class="text-5xl mb-4 neon-text-green">✅</div>
+                    <h4 class="text-xl font-bold mb-2">Staking com Rank</h4>
+                    <p class="text-gray-400">Ganhe bônus visuais e suba no ranking ao fazer staking de LNR.</p>
+                </div>
+                <div class="card-bg p-6 rounded-xl flex flex-col items-center text-center">
+                    <div class="text-5xl mb-4 neon-text-blue">✅</div>
+                    <h4 class="text-xl font-bold mb-2">Acesso a Eventos</h4>
+                    <p class="text-gray-400">LNR é a moeda oficial para acesso a eventos exclusivos do ecossistema.</p>
+                </div>
+                <div class="card-bg p-6 rounded-xl flex flex-col items-center text-center">
+                    <div class="text-5xl mb-4 neon-text-purple">✅</div>
+                    <h4 class="text-xl font-bold mb-2">Recompensas por Missões</h4>
+                    <p class="text-gray-400">Participe de missões da comunidade e seja recompensado com LNR.</p>
+                </div>
+                <div class="card-bg p-6 rounded-xl flex flex-col items-center text-center">
+                    <div class="text-5xl mb-4 neon-text-green">✅</div>
+                    <h4 class="text-xl font-bold mb-2">Mini Jogo Web3</h4>
+                    <p class="text-gray-400">Futuro uso de LNR como moeda principal em um mini jogo Web3.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="partners" class="container mx-auto px-4 py-16">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-12">Nossos <span class="neon-text-blue">Parceiros</span> & Ecossistema</h2>
+            <div class="card-bg p-8 rounded-2xl max-w-5xl mx-auto text-center">
+                <h3 class="text-3xl font-bold neon-text-green mb-6">Impulsionado por:</h3>
+                <div class="flex flex-col md:flex-row justify-center items-center mb-10 gap-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/b/b9/Solana_logo.png" alt="Solana Logo" class="h-20 md:h-24 mx-4 partner-logo solana">
+                    <span class="text-5xl font-bold neon-text-blue ml-4">Solana</span>
+                    <p class="text-lg text-gray-400 max-w-xl">
+                        Escolhemos a **Solana** por sua velocidade inigualável, escalabilidade e custos de transação mínimos, garantindo uma experiência DeFi fluida para o ecossistema LUNARO.
+                    </p>
+                </div>
+
+                <h3 class="text-3xl font-bold neon-text-purple mt-12 mb-6">Conecte-se à Nossa Comunidade:</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 mb-10">
+                    <div class="flex flex-col items-center">
+                        <a href="https://x.com/CoinLunaro" target="_blank" class="text-6xl text-gray-300 hover:neon-text-blue transition duration-300 mb-2 partner-logo twitter"><i class="fab fa-twitter"></i></a>
+                        <p class="text-lg text-gray-400">X (Twitter)</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <a href="https://www.instagram.com/lunarocoin/" target="_blank" class="text-6xl text-gray-300 hover:neon-text-purple transition duration-300 mb-2 partner-logo instagram"><i class="fab fa-instagram"></i></a>
+                        <p class="text-lg text-gray-400">Instagram</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <a href="https://t.me/LUNARO_Solanium_Group" target="_blank" class="text-6xl text-gray-300 hover:neon-text-green transition duration-300 mb-2 partner-logo telegram"><i class="fab fa-telegram"></i></a>
+                        <p class="text-lg text-gray-400">Telegram</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <a href="#" target="_blank" class="text-6xl text-gray-300 hover:neon-text-blue transition duration-300 mb-2 partner-logo facebook"><i class="fab fa-facebook"></i></a>
+                        <p class="text-lg text-gray-400">Facebook</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <a href="https://discord.gg/rn9vRGDc" target="_blank" class="text-6xl text-gray-300 hover:neon-text-purple transition duration-300 mb-2"><i class="fab fa-discord"></i></a>
+                        <p class="text-lg text-gray-400">Discord (Grupo Oficial)</p>
+                    </div>
+                     <div class="flex flex-col items-center">
+                        <a href="https://www.youtube.com/@cryptocoin-y5q" target="_blank" class="text-6xl text-gray-300 hover:neon-text-green transition duration-300 mb-2"><i class="fab fa-youtube"></i></a>
+                        <p class="text-lg text-gray-400">YouTube (Canal LUNARO)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="exchanges" class="container mx-auto px-4 py-16">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-12">Onde Negociar <span class="neon-text-purple">LNR</span></h2>
+            <div class="card-bg p-8 rounded-2xl max-w-4xl mx-auto text-center">
+                <p class="text-lg text-gray-300 mb-8">
+                    Após a pré-venda, LUNARO será listado em diversas plataformas para garantir ampla acessibilidade.
+                </p>
+
+                <h3 class="text-3xl font-bold neon-text-blue mb-6">Corretoras Descentralizadas (DEX):</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                    <div class="flex flex-col items-center p-4 bg-gray-800 rounded-xl border border-neon-green shadow-lg shadow-neon-green/20">
+                        <img src="https://bafybeiepmbfxbmxbf4rfruoojngfikzdwhklmc5244xumzbiy27xo46424.ipfs.w3s.link/11165.png" alt="Orca DEX Logo" class="h-16 mb-2 partner-logo">
+                        <p class="text-xl neon-text-green font-bold">Orca</p>
+                        <p class="text-gray-400 text-sm">Principal DEX na Solana</p>
+                        <a href="#" target="_blank" class="neon-button px-4 py-2 mt-4 text-sm">Negocie LNR na Orca (Em Breve)</a>
+                    </div>
+                    <div class="flex flex-col items-center p-4 bg-gray-800 rounded-xl border border-neon-purple shadow-lg shadow-neon-purple/20">
+                        <img src="https://bafybeibwocqnkoqimpq6ri2qjenm34xtzj37zd4ogg37quawnrd4ksc73e.ipfs.w3s.link/8526.png" alt="Raydium DEX Logo" class="h-16 mb-2 partner-logo">
+                        <p class="text-xl neon-text-purple font-bold">Raydium</p>
+                        <p class="text-gray-400 text-sm">Ecossistema DeFi multifuncional</p>
+                        <a href="#" target="_blank" class="neon-button px-4 py-2 mt-4 text-sm">Negocie LNR na Raydium (Em Breve)</a>
+                    </div>
+                </div>
+
+                <h3 class="text-3xl font-bold neon-text-green mb-6">Corretoras Centralizadas (CEX):</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="flex flex-col items-center p-4 bg-gray-800 rounded-xl border border-neon-blue shadow-lg shadow-neon-blue/20">
+                        <img src="https://bafybeib4mukxwvvsg5vza6wkvq2nz6rq4v5jtheowqdsuls3dfaervee54.ipfs.w3s.link/eb2349c3-b2f8-4a93-a286-8f86a62ea9d8.png" alt="Binance CEX Logo" class="h-16 mb-2 partner-logo">
+                        <p class="text-xl neon-text-blue font-bold">Binance</p>
+                        <p class="text-gray-400 text-sm">Maior exchange do mundo</p>
+                        <p class="text-sm neon-text-green mt-2">Listagem Futura</p>
+                    </div>
+                    <div class="flex flex-col items-center p-4 bg-gray-800 rounded-xl border border-neon-purple shadow-lg shadow-neon-purple/20">
+                        <img src="https://bafybeiajhg3c4azsx3jvpmx3legtmodtvptxjvrqiv4s6mv7523we2wc3y.ipfs.w3s.link/1885080.png" alt="Coinbase CEX Logo" class="h-16 mb-2 partner-logo">
+                        <p class="text-xl neon-text-purple font-bold">Coinbase</p>
+                        <p class="text-gray-400 text-sm">Exchange líder nos EUA</p>
+                        <p class="text-sm neon-text-green mt-2">Listagem Futura</p>
+                    </div>
+                    <div class="flex flex-col items-center p-4 bg-gray-800 rounded-xl border border-neon-green shadow-lg shadow-neon-green/20">
+                        <img src="https://bafybeiczkcqxu2h7ggwjcwcb7vay7jlthf3nxr7p553i5eyyywyiq5nnwa.ipfs.w3s.link/2197889f8020488480eeaeef0eced58c.png" alt="Bitget CEX Logo" class="h-16 mb-2 partner-logo">
+                        <p class="text-xl neon-text-green font-bold">Bitget</p>
+                        <p class="text-gray-400 text-sm">Plataforma de trading de derivativos</p>
+                        <p class="text-sm neon-text-blue mt-2">Listagem Futura</p>
+                    </div>
+                </div>
+
+                <p class="text-gray-500 text-sm mt-8">
+                    <span style="color: var(--red-alert);">Nota:</span> As listagens em exchanges centralizadas (CEX) estão sujeitas a termos e aprovações.
+                </p>
+            </div>
+        </section>
+
+        <section id="tokenomics" class="container mx-auto px-4 py-16">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-12">Tokenomics de <span class="neon-text-green">LUNARO</span></h2>
+            <div class="card-bg p-8 rounded-2xl max-w-4xl mx-auto">
+                <p class="text-2xl font-bold text-center mb-8 neon-text-blue">Fornecimento Total: 5.000.000.000 LNR</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <ul class="space-y-4 text-lg text-gray-300">
+                        <li class="flex items-center"><span class="text-2xl mr-3 neon-text-purple">●</span> 25% (1.25B) – Pré-venda</li>
+                        <li class="flex items-center"><span class="text-2xl mr-3 neon-text-green">●</span> 15% (750M) – Equipe (vesting 12 meses)</li>
+                        <li class="flex items-center"><span class="text-2xl mr-3 neon-text-blue">●</span> 10% (500M) – Liquidez inicial + DEX listing</li>
+                        <li class="flex items-center"><span class="text-2xl mr-3 neon-text-purple">●</span> 20% (1B) – Recompensas de staking/mineração</li>
+                        <li class="flex items-center"><span class="text-2xl mr-3 neon-text-green">●</span> 15% (750M) – Desenvolvimento futuro (bloqueado por 6 meses)</li>
+                        <li class="flex items-center"><span class="text-2xl mr-3 neon-text-blue">●</span> 10% (500M) – Marketing e parcerias</li>
+                        <li class="flex items-center"><span class="text-2xl mr-3 neon-text-purple">●</span> 5% (250M) – Fundo da comunidade (governança)</li>
+                    </ul>
+                    <div class="flex justify-center items-center">
+                        <img src="https://placehold.co/350x350/0a0a0a/f0f?text=Tokenomics+Chart" class="rounded-full border border-fuchsia-500 shadow-lg shadow-fuchsia-500/20">
+                    </div>
+                </div>
+
+                <div class="mt-12">
+                    <h3 class="text-3xl font-bold neon-text-green mb-4">Mecanismos Deflacionários</h3>
+                    <ul class="space-y-3 text-lg text-gray-300">
+                        <li class="flex items-center"><span class="text-2xl mr-3 neon-text-blue">✓</span> Queima automática de 0.5% de cada transação.</li>
+                        <li class="flex items-center"><span class="text-2xl mr-3 neon-text-purple">✓</span> Queima de tokens não vendidos na pré-venda.</li>
+                    </ul>
+                </div>
+
+                <div class="mt-8">
+                    <h3 class="text-3xl font-bold neon-text-blue mb-4">Vesting</h3>
+                    <ul class="space-y-3 text-lg text-gray-300">
+                        <li class="flex items-center"><span class="text-2xl mr-3 neon-text-green">✓</span> Equipe e advisors com desbloqueio mensal após 6 meses.</li>
+                        <li class="flex items-center"><span class="text-2xl mr-3 neon-text-purple">✓</span> Parcerias estratégicas com linear unlock.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap" class="container mx-auto px-4 py-16">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-12">Nosso <span class="neon-text-purple">Roadmap</span></h2>
+            <div class="relative max-w-5xl mx-auto">
+                <div class="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gray-700 rounded-full hidden md:block"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div class="roadmap-item card-bg p-8 rounded-2xl md:col-start-1 md:text-right md:pr-12 relative">
+                        <div class="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-cyan-500 rounded-full border-2 border-white hidden md:block shadow-lg shadow-cyan-500/50"></div>
+                        <h3 class="text-3xl font-bold neon-text-blue mb-4">🚀 Q2 2025</h3>
+                        <ul class="list-disc list-inside space-y-2 text-lg text-gray-300">
+                            <li>Pré-venda em 3 fases</li>
+                            <li>Lançamento do staking Web3</li>
+                            <li>Listagem em Orca (Solana)</li>
+                        </ul>
+                    </div>
+
+                    <div class="roadmap-item card-bg p-8 rounded-2xl md:col-start-2 md:text-left md:pl-12 relative">
+                        <div class="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-fuchsia-500 rounded-full border-2 border-white hidden md:block shadow-lg shadow-fuchsia-500/50"></div>
+                        <h3 class="text-3xl font-bold neon-text-purple mb-4">🌕 Q3 2025</h3>
+                        <ul class="list-disc list-inside space-y-2 text-lg text-gray-300">
+                            <li>Site de eventos + login Web3</li>
+                            <li>Sistema de ranks por mineração</li>
+                            <li>Início de gamificação com quests</li>
+                        </ul>
+                    </div>
+
+                    <div class="roadmap-item card-bg p-8 rounded-2xl md:col-start-1 md:text-right md:pr-12 relative">
+                        <div class="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-lime-500 rounded-full border-2 border-white hidden md:block shadow-lg shadow-lime-500/50"></div>
+                        <h3 class="text-3xl font-bold neon-text-green mb-4">🌌 Q4 2025</h3>
+                        <ul class="list-disc list-inside space-y-2 text-lg text-gray-300">
+                            <li>Listagem em DEXs secundárias</li>
+                            <li>App mobile do ecossistema LUNARO</li>
+                            <li>Parcerias com influencers + Web3 Tools</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="whitepaper" class="container mx-auto px-4 py-16">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-12">Whitepaper & <span class="neon-text-green">Documentação Detalhada</span></h2>
+            <div class="card-bg p-8 rounded-2xl max-w-4xl mx-auto text-center">
+                <p class="text-lg text-gray-300 mb-6">
+                    Mergulhe fundo na visão, tecnologia e economia do LUNARO. Nosso whitepaper detalha cada aspecto do projeto, desde a infraestrutura técnica até os planos de longo prazo para o ecossistema.
+                </p>
+                <a href="#" target="_blank" class="neon-button px-8 py-4 text-xl font-bold">
+                    Baixar Whitepaper (PDF)
+                </a>
+                <p class="text-gray-500 text-sm mt-4">
+                    <span style="color: var(--red-alert);">Nota:</span> O whitepaper é um documento técnico e pode ser atualizado.
+                </p>
+            </div>
+        </section>
+
+        <section id="faq" class="container mx-auto px-4 py-16">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-12">Perguntas <span class="neon-text-purple">Frequentes (FAQ)</span></h2>
+            <div class="card-bg p-8 rounded-2xl max-w-4xl mx-auto">
+                <div class="space-y-4">
+                    <div class="faq-item">
+                        <div class="faq-question flex justify-between items-center">
+                            <h3 class="text-xl font-bold neon-text-blue">O que é LUNARO?</h3>
+                            <i class="fas fa-chevron-down text-neon-blue"></i>
+                        </div>
+                        <div class="faq-answer text-gray-300">
+                            <p>LUNARO é um ecossistema digital pioneiro na blockchain Solana que transforma a energia da atenção humana em valor tangível, combinando mineração, staking e recompensas gamificadas.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question flex justify-between items-center">
+                            <h3 class="text-xl font-bold neon-text-blue">Como posso participar da pré-venda?</h3>
+                            <i class="fas fa-chevron-down text-neon-blue"></i>
+                        </div>
+                        <div class="faq-answer text-gray-300">
+                            <p>Você pode participar da pré-venda usando USDC ou USDT diretamente da sua carteira Solana. Se não tiver criptomoedas, pode adquiri-las através de serviços de rampa de acesso (fiat on-ramp) integrados no nosso site.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question flex justify-between items-center">
+                            <h3 class="text-xl font-bold neon-text-blue">Qual é o fornecimento total de LUNARO?</h3>
+                            <i class="fas fa-chevron-down text-neon-blue"></i>
+                        </div>
+                        <div class="faq-answer text-gray-300">
+                            <p>O fornecimento total de LUNARO é de 5.000.000.000 LNR. Detalhes sobre a distribuição podem ser encontrados na seção de Tokenomics.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question flex justify-between items-center">
+                            <h3 class="text-xl font-bold neon-text-blue">Quando LUNARO será listado em exchanges?</h3>
+                            <i class="fas fa-chevron-down text-neon-blue"></i>
+                        </div>
+                        <div class="faq-answer text-gray-300">
+                            <p>Após a pré-venda, LUNARO será listado em DEXs como Orca e Raydium, e futuramente em CEXs como Binance, Coinbase e Bitget. As datas exatas serão anunciadas em nosso roadmap e canais sociais.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="container mx-auto px-4 py-16">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-12">Galeria & <span class="neon-text-green">Mídia Visual</span></h2>
+            <div class="card-bg p-8 rounded-2xl max-w-5xl mx-auto text-center">
+                <p class="text-lg text-gray-300 mb-8">
+                    Explore o universo visual de LUNARO com nossa coleção de imagens e vídeos conceituais.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="relative group rounded-xl overflow-hidden border border-neon-blue shadow-lg shadow-neon-blue/20">
+                        <img src="https://placehold.co/400x250/0a0a0a/0ff?text=Conceito+1" alt="LUNARO Concept 1" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span class="text-xl neon-text-blue font-bold">Conceito Cyberpunk</span>
+                        </div>
+                    </div>
+                    <div class="relative group rounded-xl overflow-hidden border border-neon-purple shadow-lg shadow-neon-purple/20">
+                        <img src="https://placehold.co/400x250/0a0a0a/f0f?text=Conceito+2" alt="LUNARO Concept 2" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span class="text-xl neon-text-purple font-bold">Arquitetura Futura</span>
+                        </div>
+                    </div>
+                    <div class="relative group rounded-xl overflow-hidden border border-neon-green shadow-lg shadow-neon-green/20">
+                        <img src="https://placehold.co/400x250/0a0a0a/0f0?text=Conceito+3" alt="LUNARO Concept 3" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span class="text-xl neon-text-green font-bold">Personagens</span>
+                        </div>
+                    </div>
+                    <div class="relative group rounded-xl overflow-hidden border border-neon-blue shadow-lg shadow-neon-blue/20">
+                        <img src="https://placehold.co/400x250/0a0a0a/0ff?text=Video+Teaser" alt="LUNARO Video Teaser" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span class="text-xl neon-text-blue font-bold">Vídeo Teaser</span>
+                        </div>
+                    </div>
+                    <div class="relative group rounded-xl overflow-hidden border border-neon-purple shadow-lg shadow-neon-purple/20">
+                        <img src="https://placehold.co/400x250/0a0a0a/f0f?text=Gameplay+Preview" alt="LUNARO Gameplay Preview" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span class="text-xl neon-text-purple font-bold">Prévia de Gameplay</span>
+                        </div>
+                    </div>
+                    <div class="relative group rounded-xl overflow-hidden border border-neon-green shadow-lg shadow-neon-green/20">
+                        <img src="https://placehold.co/400x250/0a0a0a/0f0?text=Arte+Conceitual" alt="LUNARO Concept Art" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span class="text-xl neon-text-green font-bold">Arte Conceitual Adicional</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="newsletter" class="container mx-auto px-4 py-16">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-12">Assine Nossa <span class="neon-text-blue">Newsletter</span></h2>
+            <div class="card-bg p-8 rounded-2xl max-w-xl mx-auto text-center">
+                <p class="text-lg text-gray-300 mb-6">
+                    Mantenha-se atualizado com as últimas notícias, anúncios e desenvolvimentos do projeto LUNARO.
+                </p>
+                <form id="newsletterForm" class="flex flex-col gap-4">
+                    <input type="email" id="newsletterEmail" class="w-full p-3 bg-gray-700 border border-neon-green text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neon-green" placeholder="Seu e-mail" required>
+                    <button type="submit" class="neon-button px-6 py-3 text-lg">Assinar</button>
+                </form>
+                <p id="newsletterMessage" class="text-sm mt-4 hidden"></p>
+            </div>
+        </section>
+
+        <section id="audit-results" class="container mx-auto px-4 py-16">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-12">Resultados de <span class="neon-text-purple">Auditoria</span></h2>
+            <div class="card-bg p-8 rounded-2xl max-w-4xl mx-auto text-center">
+                <p class="text-lg text-gray-300 mb-6">
+                    A segurança e a transparência são pilares fundamentais do LUNARO. Nosso contrato inteligente e a própria estrutura do projeto foram submetidos a uma auditoria rigorosa por <span class="neon-text-green font-bold">Jerry Stark</span>.
+                </p>
+                <p class="text-lg text-gray-300 mb-6">
+                    Essa auditoria, realizada em parceria com a <span class="neon-text-blue font-bold">Solana</span> e desenvolvida na rede Solana, garante a robustez e a integridade do ecossistema LUNARO, oferecendo confiança aos nossos usuários.
+                </p>
+                <a href="#" target="_blank" class="neon-button px-8 py-4 text-xl font-bold">
+                    Ver Relatório de Auditoria (PDF)
+                </a>
+                <p class="text-gray-500 text-sm mt-4">
+                    <span style="color: var(--red-alert);">Nota:</span> O relatório de auditoria detalha as descobertas e as medidas de segurança implementadas.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-black bg-opacity-70 backdrop-blur-sm p-8 mt-16 rounded-t-xl">
+        <div class="container mx-auto text-center text-gray-400">
+            <div class="flex flex-wrap justify-center space-x-6 mb-6">
+                <a href="#" class="hover:neon-text-blue transition duration-300">Termos & Condições</a>
+                <a href="#" class="hover:neon-text-purple transition duration-300">Aviso de Risco</a>
+                <a href="mailto:lunarocoin@gmail.com" class="hover:neon-text-green transition duration-300">lunarocoin@gmail.com</a>
+            </div>
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="https://x.com/CoinLunaro" target="_blank" class="text-2xl hover:neon-text-blue transition duration-300">X (Twitter)</a>
+                <a href="https://www.instagram.com/lunarocoin/" target="_blank" class="text-2xl hover:neon-text-purple transition duration-300">Instagram</a>
+                <a href="https://t.me/LUNARO_Solanium_Group" target="_blank" class="text-2xl hover:neon-text-green transition duration-300">Telegram</a>
+            </div>
+            <p>© 2025 LUNARO. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <div id="messageBox" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
+        <div class="bg-gray-900 p-8 rounded-xl border border-cyan-500 shadow-lg shadow-cyan-500/50 max-w-md text-center">
+            <h3 id="messageBoxTitle" class="text-2xl font-bold neon-text-blue mb-4"></h3>
+            <p id="messageBoxContent" class="text-lg text-gray-300 mb-6"></p>
+            <button onclick="hideMessageBox()" class="neon-button px-6 py-3 text-lg">OK</button>
+        </div>
+    </div>
+
+    <div id="purchaseModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
+        <div class="bg-gray-900 p-8 rounded-2xl border border-purple-500 shadow-lg shadow-purple-500/50 max-w-lg w-full text-center">
+            <h3 class="text-2xl font-bold neon-text-purple mb-6">Comprar LNR na Pré-Venda</h3>
+            <p class="text-lg text-gray-300 mb-4">Você está conectado com: <br><span id="modalWalletAddress" class="neon-text-blue text-base break-words"></span></p>
+            
+            <p class="text-gray-400 text-sm mb-6">
+                <span style="color: var(--red-alert);">ATENÇÃO:</span> Esta é uma **simulação** da compra para fins de demonstração. Em um ambiente real, você enviaria SOL/USDC/USDT para o contrato inteligente da pré-venda.
+            </p>
+
+            <div class="mb-6">
+                <label class="block text-left text-gray-300 mb-2">Escolha a moeda de pagamento:</label>
+                <div class="flex justify-center space-x-4 mb-4">
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="paymentToken" value="USDC" checked class="form-radio text-neon-blue h-5 w-5">
+                        <span class="ml-2 text-lg text-gray-300">USDC</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="paymentToken" value="USDT" class="form-radio text-neon-green h-5 w-5">
+                        <span class="ml-2 text-lg text-gray-300">USDT</span>
+                    </label>
+                </div>
+                
+                <label for="purchaseAmount" class="block text-left text-gray-300 mb-2">Quantidade que deseja comprar:</label>
+                <input type="number" id="purchaseAmount" class="w-full p-3 bg-gray-800 border border-neon-green text-neon-green rounded-lg focus:outline-none focus:ring-2 focus:ring-neon-green" placeholder="Min 10 USD" min="10" step="1">
+            </div>
+
+            <p class="text-lg text-gray-300 mb-6">Você receberá aproximadamente: <span id="receivedLNR" class="neon-text-blue font-bold">0 LNR</span></p>
+
+            <div class="flex justify-center space-x-4">
+                <button onclick="confirmPurchase()" class="neon-button px-6 py-3 text-lg">Confirmar Compra (Simulado)</button>
+                <button onclick="hidePurchaseModal()" class="bg-gray-700 text-gray-200 px-6 py-3 rounded-lg hover:bg-gray-600 transition duration-300">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- GLOBAL VARIABLES & CONSTANTS ---
+        let connectedPublicKey = null; // Stores the connected wallet's public key (Phantom/Solflare)
+        let socialWalletPublicKey = null; // Stores the simulated social-linked wallet public key
+        let socialWalletLunaroBalance = 10000; // Simulated LUNARO balance for social wallet
+        let raisedAmount = 0; // Total raised in USD equivalent
+        let tokensSold = 0;
+        const hardCap = 150000; // Total Hard Cap in USD equivalent
+        const totalTokensForPresale = 10000000; // LNR (150k / 0.015)
+        const tokenPricePerLNR = 0.015; // USD per LNR
+        const countdownDate = new Date("May 30, 2025 18:00:00").getTime(); // Example date: May 30, 2025 6 PM - Adjust this!
+
+        // --- DOM ELEMENTS ---
+        const connectWalletBtnNav = document.getElementById('connectWalletBtnNav');
+        const walletAddressDisplayNav = document.getElementById('walletAddressDisplayNav');
+        const walletStatus = document.getElementById('walletStatus');
+        const connectedWalletAddress = document.getElementById('connectedWalletAddress');
+        const participateButton = document.getElementById('participateButton');
+        const purchaseModal = document.getElementById('purchaseModal');
+        const modalWalletAddress = document.getElementById('modalWalletAddress');
+        const purchaseAmountInput = document.getElementById('purchaseAmount');
+        const receivedLNRDisplay = document.getElementById('receivedLNR');
+        const progressBarFill = document.getElementById("progressBarFill");
+        const raisedAmountDisplay = document.getElementById("raisedAmount");
+        const tokensRemainingDisplay = document.getElementById("tokensRemaining");
+        const countdownElement = document.getElementById("countdown");
+        const daysElement = document.getElementById("days");
+        const hoursElement = document.getElementById("hours");
+        const minutesElement = document.getElementById("minutes");
+        const secondsElement = document.getElementById("seconds");
+        const messageBox = document.getElementById("messageBox");
+        const messageBoxTitle = document.getElementById("messageBoxTitle");
+        const messageBoxContent = document.getElementById("messageBoxContent");
+
+        // Payment token radio buttons
+        const paymentTokenRadios = document.querySelectorAll('input[name="paymentToken"]');
+
+        // Social Wallet elements
+        const socialWalletArea = document.getElementById('socialWalletArea');
+        const socialWalletAddressDisplay = document.getElementById('socialWalletAddress');
+        const socialWalletBalanceDisplay = document.getElementById('socialWalletBalance');
+        const recipientAddressInput = document.getElementById('recipientAddress');
+        const sendAmountInput = document.getElementById('sendAmount');
+        
+        // AI Support Chatbot elements
+        const chatWindow = document.getElementById('chatWindow');
+        const chatInput = document.getElementById('chatInput');
+        const sendChatBtn = document.getElementById('sendChatBtn');
+        const chatLoading = document.getElementById('chatLoading');
+
+        // Newsletter elements
+        const newsletterForm = document.getElementById('newsletterForm');
+        const newsletterEmailInput = document.getElementById('newsletterEmail');
+        const newsletterMessage = document.getElementById('newsletterMessage');
+
+        // FAQ elements
+        const faqItems = document.querySelectorAll('.faq-item');
+
+
+        // --- UTILITY FUNCTIONS ---
+
+        // Universal Message Box Functions
+        function showMessageBox(title, content) {
+            messageBoxTitle.textContent = title;
+            messageBoxContent.textContent = content;
+            messageBox.classList.remove("hidden");
+        }
+
+        function hideMessageBox() {
+            messageBox.classList.add("hidden");
+        }
+
+        // Function to detect if Solana wallet (e.g., Phantom, Solflare) is installed
+        function isSolanaWalletInstalled() {
+            return window.solana && (window.solana.isPhantom || window.solana.isSolflare);
+        }
+
+        // --- PRESALE PROGRESS FUNCTIONS ---
+
+        function updatePresaleProgress() {
+            const progressPercentage = (raisedAmount / hardCap) * 100;
+            progressBarFill.style.width = `${progressPercentage}%`;
+            raisedAmountDisplay.textContent = `${raisedAmount.toLocaleString()} USD Arrecadados`; // Display in USD equivalent
+            tokensRemainingDisplay.textContent = `${(totalTokensForPresale - tokensSold).toLocaleString()} LNR Restantes`;
+
+            if (raisedAmount >= hardCap) {
+                progressBarFill.style.backgroundColor = 'var(--neon-purple)';
+                progressBarFill.style.boxShadow = '0 0 8px var(--neon-purple)';
+                participateButton.disabled = true;
+                participateButton.textContent = "PRÉ-VENDAS ENCERRADAS!";
+                showMessageBox("Pré-Vendas Encerradas", "O Hard Cap foi atingido! Agradecemos a todos os participantes.");
+            }
+        }
+
+        // Simulate presale progress (for demonstration purposes)
+        // In a real app, this would be updated by backend data or direct contract calls
+        setInterval(() => {
+            if (raisedAmount < hardCap) {
+                const increase = Math.floor(Math.random() * 5000) + 100; // Simulate random purchases
+                raisedAmount = Math.min(hardCap, raisedAmount + increase);
+                tokensSold = raisedAmount / tokenPricePerLNR; // Tokens sold based on USD equivalent
+                updatePresaleProgress();
+            }
+        }, 3000); // Update every 3 seconds
+
+
+        // --- COUNTDOWN TIMER FUNCTIONS ---
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result in the elements
+            daysElement.innerHTML = String(days).padStart(2, '0');
+            hoursElement.innerHTML = String(hours).padStart(2, '0');
+            minutesElement.innerHTML = String(minutes).padStart(2, '0');
+            secondsElement.innerHTML = String(seconds).padStart(2, '0');
+
+            // If the countdown is over, update status
+            if (distance < 0) {
+                clearInterval(this); // Clear the interval
+                countdownElement.innerHTML = "<span class='neon-text-green'>PRÉ-VENDA AO VIVO!</span>";
+                // Only enable button if presale is not over
+                if (raisedAmount < hardCap) {
+                    participateButton.disabled = false;
+                    participateButton.textContent = "PARTICIPAR AGORA!";
+                }
+            } else {
+                // Ensure button is disabled until countdown is over (or if presale is already over)
+                if (raisedAmount < hardCap) {
+                    participateButton.disabled = true;
+                }
+            }
+            updateWalletUI(); // Call this to ensure button state is correct if countdown finishes
+        }
+
+
+        // --- WALLET INTEGRATION (PHANTOM/SOLFLARE SIMULATED) FUNCTIONS ---
+
+        async function connectWallet() {
+            if (!isSolanaWalletInstalled()) {
+                showMessageBox("Carteira Não Encontrada", "Por favor, instale uma carteira Solana como Phantom ou Solflare para participar da pré-venda.");
+                return;
+            }
+
+            try {
+                const resp = await window.solana.connect();
+                connectedPublicKey = resp.publicKey.toBase58();
+                updateWalletUI();
+                showMessageBox("Carteira Conectada!", `Sua carteira ${connectedPublicKey.substring(0, 6)}...${connectedPublicKey.slice(-4)} foi conectada com sucesso.`);
+            } catch (err) {
+                console.error("Erro ao conectar a carteira:", err);
+                showMessageBox("Conexão Recusada", "A conexão com a carteira foi recusada ou ocorreu um erro.");
+                connectedPublicKey = null;
+                updateWalletUI();
+            }
+        }
+
+        async function disconnectWallet() {
+            if (window.solana && window.solana.disconnect) {
+                try {
+                    await window.solana.disconnect();
+                    connectedPublicKey = null;
+                    updateWalletUI();
+                    showMessageBox("Carteira Desconectada", "Sua carteira foi desconectada.");
+                } catch (err) {
+                    console.error("Erro ao desconectar a carteira:", err);
+                }
+            }
+        }
+
+        function updateWalletUI() {
+            if (connectedPublicKey) {
+                // Nav bar
+                connectWalletBtnNav.classList.add('hidden');
+                walletAddressDisplayNav.classList.remove('hidden');
+                walletAddressDisplayNav.textContent = `Conectado: ${connectedPublicKey.substring(0, 4)}...${connectedPublicKey.slice(-4)}`;
+                walletAddressDisplayNav.onclick = disconnectWallet; // Click to disconnect
+
+                // Presale section
+                walletStatus.innerHTML = `Status da Carteira: <span class="neon-text-green">Conectada</span>`;
+                connectedWalletAddress.classList.remove('hidden');
+                connectedWalletAddress.textContent = `Endereço: ${connectedPublicKey}`;
+                
+                participateButton.textContent = "COMPRAR LNR AGORA!";
+                participateButton.onclick = showPurchaseModal; // Change action to show purchase modal
+                participateButton.disabled = false; // Ensure it's enabled if countdown allows
+            } else {
+                // Nav bar
+                connectWalletBtnNav.classList.remove('hidden');
+                walletAddressDisplayNav.classList.add('hidden');
+                connectWalletBtnNav.textContent = "Conectar Carteira";
+                connectWalletBtnNav.onclick = connectWallet;
+
+                // Presale section
+                walletStatus.innerHTML = `Status da Carteira: <span class="neon-text-purple">Desconectada</span>`;
+                connectedWalletAddress.classList.add('hidden');
+                connectedWalletAddress.textContent = "";
+
+                participateButton.textContent = "Conectar Carteira para Participar";
+                participateButton.onclick = connectWallet; // Change action back to connect
+            }
+             // Ensure the participate button is disabled if presale is over
+             if (raisedAmount >= hardCap) {
+                participateButton.disabled = true;
+                participateButton.textContent = "PRÉ-VENDAS ENCERRADAS!";
+            }
+        }
+
+
+        // --- PURCHASE MODAL LOGIC ---
+        function showPurchaseModal() {
+            if (!connectedPublicKey) {
+                showMessageBox("Carteira Não Conectada", "Por favor, conecte sua carteira para continuar a compra.");
+                return;
+            }
+            modalWalletAddress.textContent = connectedPublicKey;
+            purchaseAmountInput.value = ''; // Clear previous input
+            receivedLNRDisplay.textContent = '0 LNR';
+            purchaseModal.classList.remove('hidden');
+        }
+
+        function hidePurchaseModal() {
+            purchaseModal.classList.add('hidden');
+        }
+
+        // Event listener for input amount and payment token selection
+        purchaseAmountInput.addEventListener('input', updateReceivedLNR);
+        paymentTokenRadios.forEach(radio => {
+            radio.addEventListener('change', updateReceivedLNR);
+        });
+
+        function updateReceivedLNR() {
+            const amount = parseFloat(purchaseAmountInput.value);
+            if (isNaN(amount) || amount <= 0) {
+                receivedLNRDisplay.textContent = '0 LNR';
+                return;
+            }
+            // Price is 0.015 USD per LNR, so LNR = Amount / 0.015
+            const received = amount / tokenPricePerLNR;
+            receivedLNRDisplay.textContent = `${received.toLocaleString(undefined, { maximumFractionDigits: 2 })} LNR`;
+        }
+
+        async function confirmPurchase() {
+            const amount = parseFloat(purchaseAmountInput.value);
+            if (isNaN(amount) || amount < 10) { // Enforce min 10 USD
+                showMessageBox("Valor Inválido", "Por favor, insira um valor válido para a compra (mínimo de 10 USD).");
+                return;
+            }
+
+            const selectedPaymentToken = document.querySelector('input[name="paymentToken"]:checked').value;
+
+            hidePurchaseModal(); // Close purchase modal
+
+            // Simulate transaction process
+            showMessageBox("Processando Compra...", `Simulando transação de ${amount} ${selectedPaymentToken}. Por favor, confirme na sua carteira (se fosse uma transação real).`);
+
+            // Simulate network delay
+            setTimeout(() => {
+                // In a real scenario, you'd send a transaction to a smart contract here.
+                // For this simulation, we just update the progress directly.
+                raisedAmount += amount; // Add to total raised USD equivalent
+                tokensSold += amount / tokenPricePerLNR;
+                updatePresaleProgress();
+
+                // Also update the simulated social wallet balance
+                socialWalletLunaroBalance += (amount / tokenPricePerLNR);
+                updateSocialWalletUI();
+
+                showMessageBox("Compra Concluída!", `Parabéns! Você simulou a compra de ${amount} ${selectedPaymentToken} e receberá aproximadamente ${receivedLNRDisplay.textContent} de LNR. Os tokens seriam enviados para ${connectedPublicKey.substring(0, 6)}...${connectedPublicKey.slice(-4)}`);
+            }, 3000); // Simulate 3 seconds transaction time
+        }
+
+
+        // --- SOCIAL LOGIN & WALLET FUNCTIONS (SIMULATED) ---
+
+        function generateRandomSolanaAddress() {
+            // This is a simplified simulation. Real Solana addresses are derived from keypairs.
+            // For demonstration, we'll create a string that looks like one.
+            const chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+            let address = 'G'; // Solana addresses often start with G or similar
+            for (let i = 0; i < 43; i++) { // Solana addresses are 32 bytes, base58 encoded ~44 chars
+                address += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return address;
+        }
+
+        function connectSocialWallet(provider) {
+            // Simulate a delay for login process
+            showMessageBox("Conectando...", `Tentando login com ${provider}...`);
+
+            setTimeout(() => {
+                // In a real scenario, this would involve OAuth flow and a backend
+                // to securely generate/retrieve a Solana keypair for the user.
+                socialWalletPublicKey = generateRandomSolanaAddress();
+                updateSocialWalletUI();
+                showMessageBox("Login Social Concluído!", `Você se conectou com ${provider} e sua carteira LUNARO vinculada foi ativada: ${socialWalletPublicKey.substring(0, 6)}...${socialWalletPublicKey.slice(-4)}`);
+            }, 2000);
+        }
+
+        function updateSocialWalletUI() {
+            if (socialWalletPublicKey) {
+                socialWalletArea.classList.remove('hidden');
+                socialWalletAddressDisplay.textContent = socialWalletPublicKey;
+                socialWalletBalanceDisplay.textContent = `${socialWalletLunaroBalance.toLocaleString(undefined, { maximumFractionDigits: 2 })} LNR`;
+            } else {
+                socialWalletArea.classList.add('hidden');
+                socialWalletAddressDisplay.textContent = '';
+                socialWalletBalanceDisplay.textContent = '0 LNR';
+            }
+        }
+
+        async function sendLunaro() {
+            const recipient = recipientAddressInput.value.trim();
+            const amount = parseFloat(sendAmountInput.value);
+
+            if (!socialWalletPublicKey) {
+                showMessageBox("Carteira Social Não Conectada", "Por favor, faça login com uma conta social para enviar LUNARO.");
+                return;
+            }
+            if (!recipient) {
+                showMessageBox("Endereço Inválido", "Por favor, insira o endereço do destinatário.");
+                return;
+            }
+            if (isNaN(amount) || amount <= 0) {
+                showMessageBox("Quantidade Inválida", "Por favor, insira uma quantidade válida para enviar.");
+                return;
+            }
+            if (amount > socialWalletLunaroBalance) {
+                showMessageBox("Saldo Insuficiente", "Você não tem LUNARO suficiente em sua carteira vinculada.");
+                return;
+            }
+
+            showMessageBox("Enviando LUNARO...", `Simulando envio de ${amount} LNR para ${recipient.substring(0, 6)}...${recipient.slice(-4)}`);
+
+            setTimeout(() => {
+                // In a real scenario, this would involve:
+                // 1. Backend call to sign and send a Solana transaction
+                // 2. Using the private key associated with the social wallet (securely stored on backend/WaaS)
+                // 3. Interacting with the Solana blockchain to transfer the actual tokens.
+
+                socialWalletLunaroBalance -= amount;
+                updateSocialWalletUI();
+                recipientAddressInput.value = '';
+                sendAmountInput.value = '';
+
+                showMessageBox("LUNARO Enviado!", `Você simulou o envio de ${amount} LNR para ${recipient.substring(0, 6)}...${recipient.slice(-4)}. Saldo restante: ${socialWalletLunaroBalance.toLocaleString(undefined, { maximumFractionDigits: 2 })} LNR.`);
+            }, 3000);
+        }
+
+
+        // --- AI SUPPORT CHATBOT FUNCTIONS ---
+        async function sendQuestionToAI() {
+            const userQuestion = chatInput.value.trim();
+            if (!userQuestion) {
+                showMessageBox("Pergunta Vazia", "Por favor, digite sua pergunta para o bot de IA.");
+                return;
+            }
+
+            // Display user message
+            appendMessage(userQuestion, 'user');
+            chatInput.value = ''; // Clear input
+            chatLoading.classList.remove('hidden'); // Show loading indicator
+            sendChatBtn.disabled = true; // Disable send button
+
+            // Prepare prompt for Gemini API
+            const prompt = `Você é um chatbot de suporte para o projeto de criptomoeda LUNARO, que está na blockchain Solana. O LUNARO é uma moeda que transforma a energia da atenção em valor real, com mineração, staking e recompensas gamificadas. A pré-venda tem um soft cap de 30.000 USDC e um hard cap de 150.000 USDC. O fornecimento total é de 5.000.000.000 LNR, com preço de pré-venda de 0.015 USD por LNR. Existem mecanismos deflacionários (0.5% de queima por transação, queima de tokens não vendidos). Responda à seguinte pergunta do usuário de forma útil e concisa, usando as informações fornecidas. Se a pergunta for fora do escopo do LUNARO ou muito genérica sobre cripto, diga que você só pode ajudar com informações sobre LUNARO.
+
+            Pergunta do usuário: "${userQuestion}"`;
+
+            try {
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = ""; // Canvas will provide this at runtime
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const aiResponse = result.candidates[0].content.parts[0].text;
+                    appendMessage(aiResponse, 'ai');
+                } else {
+                    appendMessage("Desculpe, não consegui gerar uma resposta. Por favor, tente novamente mais tarde.", 'ai');
+                    console.error("Estrutura de resposta da IA inesperada:", result);
+                }
+            } catch (error) {
+                console.error("Erro ao chamar a API Gemini:", error);
+                appendMessage("Ocorreu um erro ao conectar com o serviço de IA. Por favor, tente novamente.", 'ai');
+            } finally {
+                chatLoading.classList.add('hidden'); // Hide loading indicator
+                sendChatBtn.disabled = false; // Re-enable send button
+                chatWindow.scrollTop = chatWindow.scrollHeight; // Scroll to bottom
+            }
+        }
+
+        function appendMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-message', sender);
+            messageDiv.textContent = text;
+            chatWindow.appendChild(messageDiv);
+            chatWindow.scrollTop = chatWindow.scrollHeight; // Scroll to the latest message
+        }
+
+        // --- NEWSLETTER FORM LOGIC ---
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
+            const email = newsletterEmailInput.value;
+            if (email) {
+                // In a real application, you would send this email to a backend service
+                // for subscription. For this simulation, we just show a message.
+                newsletterMessage.textContent = `Obrigado por assinar, ${email}! Você receberá as últimas notícias do LUNARO.`;
+                newsletterMessage.className = 'text-sm mt-4 text-neon-green'; // Green for success
+                newsletterMessage.classList.remove('hidden');
+                newsletterEmailInput.value = ''; // Clear input
+            } else {
+                newsletterMessage.textContent = 'Por favor, insira um endereço de e-mail válido.';
+                newsletterMessage.className = 'text-sm mt-4 text-red-alert'; // Red for error
+                newsletterMessage.classList.remove('hidden');
+            }
+        });
+
+        // --- FAQ ACCORDION LOGIC ---
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            const answer = item.querySelector('.faq-answer');
+            const icon = question.querySelector('i');
+
+            question.addEventListener('click', () => {
+                const isOpen = answer.classList.contains('open');
+
+                // Close all other open answers
+                faqItems.forEach(otherItem => {
+                    const otherAnswer = otherItem.querySelector('.faq-answer');
+                    const otherQuestion = otherItem.querySelector('.faq-question');
+                    const otherIcon = otherItem.querySelector('i');
+                    if (otherAnswer !== answer && otherAnswer.classList.contains('open')) {
+                        otherAnswer.style.maxHeight = null;
+                        otherAnswer.classList.remove('open');
+                        otherQuestion.classList.remove('active');
+                        otherIcon.classList.remove('fa-chevron-up');
+                        otherIcon.classList.add('fa-chevron-down');
+                    }
+                });
+
+                // Toggle current answer
+                if (isOpen) {
+                    answer.style.maxHeight = null;
+                    answer.classList.remove('open');
+                    question.classList.remove('active');
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                } else {
+                    answer.classList.add('open');
+                    answer.style.maxHeight = answer.scrollHeight + "px"; // Set max-height for smooth transition
+                    question.classList.add('active');
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            });
+        });
+
+
+        // --- INITIALIZATION ---
+        // Event listener for the initial connect button in nav
+        connectWalletBtnNav.addEventListener('click', connectWallet);
+        // Event listeners for AI chatbot
+        sendChatBtn.addEventListener('click', sendQuestionToAI);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) { // Send on Enter, allow Shift+Enter for new line
+                e.preventDefault();
+                sendQuestionToAI();
+            }
+        });
+
+        // Auto-connect or check existing connection on page load
+        window.onload = async () => {
+            if (isSolanaWalletInstalled()) {
+                // Check if wallet is already connected and authorized
+                if (window.solana.isConnected) {
+                    connectedPublicKey = window.solana.publicKey.toBase58();
+                    updateWalletUI();
+                }
+                // Listen for wallet account changes
+                window.solana.on('accountChanged', (publicKey) => {
+                    if (publicKey) {
+                        connectedPublicKey = publicKey.toBase58();
+                        updateWalletUI();
+                        console.log('Account changed to:', publicKey);
+                    } else {
+                        connectedPublicKey = null;
+                        updateWalletUI();
+                        console.log('Wallet disconnected via wallet UI.');
+                    }
+                });
+                window.solana.on('disconnect', () => {
+                    connectedPublicKey = null;
+                    updateWalletUI();
+                    console.log('Wallet disconnected by user.');
+                });
+            }
+            // Initial update for presale progress and countdown
+            updatePresaleProgress();
+            const countdownInterval = setInterval(updateCountdown, 1000);
+            updateCountdown(); // Initial call
+            updateSocialWalletUI(); // Initial call for social wallet
+        };
+    </script>
+</body>
+</html>
