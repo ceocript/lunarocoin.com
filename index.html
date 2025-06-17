@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUNARO | Pré-Venda Cyberpunk na Solana</title>
+    <title>LUNARO | Energia da Atenção na Solana e TON</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -81,7 +81,7 @@
             background-position: center center;
         }
 
-        /* Progress bar custom styling */
+        /* Progress bar custom styling (kept for potential future use or other progress bars) */
         .progress-bar-container {
             background-color: #333;
             border-radius: 9999px; /* Full rounded */
@@ -253,6 +253,7 @@
                 <li><a href="#gallery" class="text-gray-300 hover:text-white hover:neon-text-purple transition duration-300">Galeria</a></li>
                 <li><a href="#newsletter" class="text-gray-300 hover:text-white hover:neon-text-green transition duration-300">Newsletter</a></li>
                 <li><a href="#audit-results" class="text-gray-300 hover:text-white hover:neon-text-blue transition duration-300">Auditoria</a></li>
+                <li><a href="#mascot" class="text-gray-300 hover:text-white hover:neon-text-purple transition duration-300">Mascote</a></li> <!-- New link for mascot section -->
                 <li>
                     <button id="connectWalletBtnNav" class="neon-button px-4 py-2 rounded-xl text-sm md:text-base">
                         Conectar Carteira
@@ -286,40 +287,23 @@
                 ></iframe>
             </div>
 
-            <div class="bg-black bg-opacity-50 p-6 rounded-2xl max-w-2xl mx-auto mb-10 card-bg">
-                <h3 class="text-2xl md:text-3xl neon-text-green mb-4">Pré-Venda Começa Em:</h3>
-                <div id="countdown" class="flex justify-center space-x-4 md:space-x-8 text-4xl md:text-6xl font-bold neon-text-blue">
-                    <div><span id="days">00</span><br><span class="text-base md:text-lg text-gray-500">DIAS</span></div>
-                    <div><span id="hours">00</span><br><span class="text-base md:text-lg text-gray-500">HORAS</span></div>
-                    <div><span id="minutes">00</span><br><span class="text-base md:text-lg text-gray-500">MINUTOS</span></div>
-                    <div><span id="seconds">00</span><br><span class="text-base md:text-lg text-gray-500">SEGUNDOS</span></div>
-                </div>
-            </div>
+            <!-- Removed Presale Countdown and Progress Sections -->
+        </section>
 
-            <div id="presale" class="bg-black bg-opacity-50 p-6 rounded-2xl max-w-3xl mx-auto card-bg">
-                <h3 class="text-2xl md:text-3xl neon-text-purple mb-4">Progresso da Pré-Venda</h3>
-                <div class="flex justify-between text-lg mb-2">
-                    <span class="neon-text-green">Soft Cap: 30.000 USDC</span>
-                    <span class="neon-text-blue">Hard Cap: 150.000 USDC</span>
+        <section id="mascot" class="container mx-auto px-4 py-16">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-12">Conheça <span class="neon-text-purple">Lunaro</span>, Nossa Lua e Mascote!</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="card-bg p-8 rounded-2xl flex justify-center items-center h-full">
+                    <img src="https://bafybeiacd2wo34gfpkgjwkmjnpwwlaww65yjsvneer7rveksx62geztooa.ipfs.w3s.link/Gemini_Generated_Image_qru8qru8qru8qru8.png" alt="A Lua Lunaro" class="rounded-lg border border-cyan-500 shadow-lg shadow-cyan-500/20">
                 </div>
-                <div class="progress-bar-container mb-4">
-                    <div id="progressBarFill" class="progress-bar-fill" style="width: 0%;"></div>
+                <div class="card-bg p-8 rounded-2xl">
+                    <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                        Lunaro não é apenas nosso mascote; é a própria Lua Lunaro, a entidade que irradia a energia da atenção em nosso ecossistema. Um ser enigmático e ágil, nascido das sombras digitais e da luz neon das cidades futuristas. Ela guia os usuários através das missões, desafios e recompensas.
+                    </p>
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        Estamos entusiasmados em anunciar que a moeda LUNARO já foi lançada oficialmente na rede TON! Lunaro é o elo entre o mundo real e o universo DeFi de LUNARO, agora mais acessível do que nunca. Com sua aura cibernética e olhos que brilham com a promessa de um futuro descentralizado, Lunaro é a guardiã e a companheira de todos que buscam transformar sua atenção em valor real.
+                    </p>
                 </div>
-                <div class="flex justify-between text-xl font-bold">
-                    <span id="raisedAmount" class="neon-text-green">0 USDC Arrecadados</span>
-                    <span id="tokensRemaining" class="neon-text-blue">10,000,000 LNR Restantes</span>
-                </div>
-                
-                <p id="walletStatus" class="mt-4 text-lg text-gray-400">Status da Carteira: <span class="neon-text-purple">Desconectada</span></p>
-                <p id="connectedWalletAddress" class="text-sm text-gray-500 break-words hidden"></p>
-
-                <button id="participateButton" class="neon-button mt-8 px-8 py-4 text-xl font-bold">
-                    Conectar Carteira para Participar
-                </button>
-                <p class="text-sm text-gray-500 mt-4">
-                    <span class="neon-text-green">Bônus de 10%</span> para compras nas primeiras 24h!
-                    <span class="neon-text-purple">NFT exclusivo</span> para os 100 primeiros compradores.
-                </p>
             </div>
         </section>
 
@@ -400,32 +384,41 @@
             <h2 class="text-4xl md:text-5xl text-center font-bold mb-12">Como Comprar <span class="neon-text-green">LNR</span></h2>
             <div class="card-bg p-8 rounded-2xl max-w-4xl mx-auto text-center">
                 <p class="text-lg text-gray-300 mb-6">
-                    Para participar da pré-venda de LUNARO, você pode usar **USDC** ou **USDT** diretamente da sua carteira Solana.
+                    A moeda LUNARO já foi lançada oficialmente na rede TON! Você pode adquirir LUNARO em DEXs que suportam a rede TON, ou esperar pela nossa próxima listagem.
                 </p>
                 <p class="text-lg text-gray-300 mb-8">
-                    Se você não possui criptomoedas, pode adquiri-las utilizando métodos de pagamento fiat (Boleto, Cartão de Crédito, PIX, etc.) através de serviços de **rampa de acesso (fiat on-ramp)**.
+                    Se você não possui criptomoedas na rede TON, pode adquiri-las utilizando métodos de pagamento fiat (Boleto, Cartão de Crédito, PIX, etc.) através de serviços de rampa de acesso (fiat on-ramp).
                 </p>
 
-                <h3 class="text-2xl font-bold neon-text-blue mb-4">Compre Cripto Direto Aqui (via Onramper):</h3>
-                <div class="w-full h-[600px] md:h-[700px] bg-gray-800 rounded-xl overflow-hidden border border-neon-purple shadow-lg shadow-neon-purple/20 mb-8">
-                    <iframe 
-                        src="https://buy.onramper.com/?apiKey=YOUR_ONRAMPER_API_KEY&defaultCrypto=USDC&network=SOLANA&defaultFiat=BRL&defaultAmount=200&themeName=dark" 
-                        width="100%" 
-                        height="100%" 
-                        style="border: none; border-radius: 1rem;"
-                        allow="accelerometer; autoplay; camera; gyroscope; payment"
-                        frameborder="0"
-                    ></iframe>
-                </div>
+                <h3 class="text-2xl font-bold neon-text-blue mb-4">Compre Cripto (via Onramper)</h3>
+                <p class="text-lg text-gray-300 mb-6">
+                    Clique no botão abaixo para ser redirecionado à plataforma Onramper, onde você poderá comprar criptomoedas com diversos métodos de pagamento fiat e enviá-las para sua carteira TON.
+                </p>
+                <button onclick="window.open('https://buy.onramper.com/?apiKey=YOUR_ONRAMPER_API_KEY&defaultCrypto=USDC&network=SOLANA&defaultFiat=BRL&defaultAmount=200&themeName=dark', '_blank')" class="neon-button px-8 py-4 text-xl font-bold mb-8">
+                    Comprar Cripto na Onramper
+                </button>
                 <p class="text-gray-500 text-sm mt-4 w-full">
                     <span style="color: var(--red-alert);">Aviso:</span> Este é um serviço de terceiros (Onramper). Ele pode exigir KYC (verificação de identidade) e ter suas próprias taxas e restrições geográficas. Faça sua própria pesquisa (DYOR) antes de usar.
                 </p>
 
-                <h3 class="text-2xl font-bold neon-text-purple mt-12 mb-4">Passos para Comprar com Fiat (Geral):</h3>
-                <ol class="list-decimal list-inside text-left text-lg text-gray-300 space-y-3 mb-8">
-                    <li>**Adquira USDC ou USDT:** Use o serviço integrado acima ou outro provedor de rampa de acesso para comprar USDC ou USDT, enviando-os diretamente para o endereço da sua carteira Solana (Phantom, Solflare, etc.).</li>
-                    <li>**Conecte sua Carteira:** Após receber as criptomoedas, conecte sua carteira Solana ao nosso site (botão "Conectar Carteira").</li>
-                    <li>**Participe da Pré-Venda:** Use seus USDC ou USDT para comprar LNR diretamente no nosso formulário de pré-venda.</li>
+                <h3 class="text-2xl font-bold neon-text-purple mt-12 mb-4">Próximos Passos (Listagem em DEX):</h3>
+                <p class="text-lg text-gray-300 mb-6">
+                    Para a próxima listagem de LUNARO em uma DEX na rede Solana, estamos deixando a decisão para a nossa comunidade! Vote na sua DEX preferida:
+                </p>
+
+                <div id="dexVoteSection" class="flex flex-col md:flex-row justify-center gap-6 mb-8">
+                    <button id="voteRaydium" class="neon-button px-6 py-3 text-lg flex-1">
+                        Votar em Raydium
+                    </button>
+                    <button id="voteMeteora" class="neon-button px-6 py-3 text-lg flex-1">
+                        Votar em Meteora
+                    </button>
+                </div>
+                <p id="voteResult" class="text-lg neon-text-green mt-4 hidden">Obrigado por votar! Votos: Raydium (<span id="raydiumVotes">0</span>), Meteora (<span id="meteoraVotes">0</span>)</p>
+
+                <ol class="list-decimal list-inside text-left text-lg text-gray-300 space-y-3 mt-8 mb-8">
+                    <li>Adquira Criptomoedas: Use o serviço Onramper ou outro provedor de rampa de acesso para comprar criptomoedas (TON, USDC, USDT) e envie-as para sua carteira.</li>
+                    <li>Negocie LNR: Uma vez que o LNR esteja listado na DEX escolhida pela comunidade, você poderá usar suas criptomoedas para adquiri-los nessa plataforma.</li>
                 </ol>
             </div>
         </section>
@@ -434,7 +427,7 @@
             <h2 class="text-4xl md:text-5xl text-center font-bold mb-12">✨ Suporte AI LUNARO ✨</h2>
             <div class="card-bg p-8 rounded-2xl max-w-3xl mx-auto">
                 <p class="text-lg text-gray-300 mb-6 text-center">
-                    Pergunte ao nosso bot de IA sobre LUNARO, a pré-venda, tokenomics, ou qualquer dúvida geral!
+                    Pergunte ao nosso bot de IA sobre LUNARO, seus recursos, tokenomics, ou qualquer dúvida geral!
                 </p>
                 <div class="chat-window" id="chatWindow">
                     <div class="chat-message ai">Olá! Como posso ajudar você hoje com o projeto LUNARO?</div>
@@ -455,11 +448,11 @@
                         LUNARO é mais do que uma criptomoeda; é um ecossistema digital pioneiro que transforma a energia da atenção humana em valor tangível na blockchain Solana. Inspirado pela mística da Lua, nosso projeto une o poder da descentralização com uma experiência gamificada e imersiva.
                     </p>
                     <p class="text-lg text-gray-300 leading-relaxed">
-                        Em um futuro dark-futurista, LUNARO oferece uma nova forma de interação com o DeFi, onde a participação da comunidade é recompensada e a utilidade do token LNR se estende através de múltiplos vetores.
+                        Em um futuro dark-futurista, LUNARO oferece uma nova forma de interação com o DeFi, onde a participação da comunidade é recompensada e a utilidade do token LNR se estende através de múltiplos vetores. A moeda já foi lançada e está ativa na rede TON.
                     </p>
                 </div>
                 <div class="card-bg p-8 rounded-2xl flex justify-center items-center h-full">
-                    <img src="https://placehold.co/400x300/0a0a0a/0ff?text=LUNARO+Concept" alt="LUNARO Concept Art" class="rounded-lg border border-cyan-500 shadow-lg shadow-cyan-500/20">
+                    <img src="https://placehold.co/400x300/0a0a0a/0ff?text=LUNARO+Concept" alt="LUNARO Concept" class="rounded-lg border border-cyan-500 shadow-lg shadow-cyan-500/20">
                 </div>
             </div>
 
@@ -496,7 +489,14 @@
                     <img src="https://upload.wikimedia.org/wikipedia/en/b/b9/Solana_logo.png" alt="Solana Logo" class="h-20 md:h-24 mx-4 partner-logo solana">
                     <span class="text-5xl font-bold neon-text-blue ml-4">Solana</span>
                     <p class="text-lg text-gray-400 max-w-xl">
-                        Escolhemos a **Solana** por sua velocidade inigualável, escalabilidade e custos de transação mínimos, garantindo uma experiência DeFi fluida para o ecossistema LUNARO.
+                        O ecossistema LUNARO está construído sobre a Solana por sua velocidade inigualável e escalabilidade.
+                    </p>
+                </div>
+                <div class="flex flex-col md:flex-row justify-center items-center mb-10 gap-4">
+                    <img src="https://bafybeigfowol5b7dgp5bje3axcddwoy4vbznvdhiq3hpc3xmxxfjq3j4uy.ipfs.w3s.link/moeda%20ton.png" alt="TON Logo" class="h-20 md:h-24 mx-4 partner-logo" style="filter: drop-shadow(0 0 15px rgba(0, 136, 204, 0.7));">
+                    <span class="text-5xl font-bold neon-text-blue ml-4" style="color: #0088cc;">TON</span>
+                    <p class="text-lg text-gray-400 max-w-xl">
+                        LUNARO foi lançado na rede TON para ampliar seu alcance e utilidade, aproveitando sua velocidade e a integração com o ecossistema Telegram.
                     </p>
                 </div>
 
@@ -534,7 +534,7 @@
             <h2 class="text-4xl md:text-5xl text-center font-bold mb-12">Onde Negociar <span class="neon-text-purple">LNR</span></h2>
             <div class="card-bg p-8 rounded-2xl max-w-4xl mx-auto text-center">
                 <p class="text-lg text-gray-300 mb-8">
-                    Após a pré-venda, LUNARO será listado em diversas plataformas para garantir ampla acessibilidade.
+                    LUNARO já está disponível na rede TON. Em breve, será listado em DEXs adicionais na Solana, conforme votação da comunidade.
                 </p>
 
                 <h3 class="text-3xl font-bold neon-text-blue mb-6">Corretoras Descentralizadas (DEX):</h3>
@@ -543,17 +543,23 @@
                         <img src="https://bafybeiepmbfxbmxbf4rfruoojngfikzdwhklmc5244xumzbiy27xo46424.ipfs.w3s.link/11165.png" alt="Orca DEX Logo" class="h-16 mb-2 partner-logo">
                         <p class="text-xl neon-text-green font-bold">Orca</p>
                         <p class="text-gray-400 text-sm">Principal DEX na Solana</p>
-                        <a href="#" target="_blank" class="neon-button px-4 py-2 mt-4 text-sm">Negocie LNR na Orca (Em Breve)</a>
+                        <p class="text-sm neon-text-blue mt-2">Votação para Listagem</p>
                     </div>
                     <div class="flex flex-col items-center p-4 bg-gray-800 rounded-xl border border-neon-purple shadow-lg shadow-neon-purple/20">
                         <img src="https://bafybeibwocqnkoqimpq6ri2qjenm34xtzj37zd4ogg37quawnrd4ksc73e.ipfs.w3s.link/8526.png" alt="Raydium DEX Logo" class="h-16 mb-2 partner-logo">
                         <p class="text-xl neon-text-purple font-bold">Raydium</p>
                         <p class="text-gray-400 text-sm">Ecossistema DeFi multifuncional</p>
-                        <a href="#" target="_blank" class="neon-button px-4 py-2 mt-4 text-sm">Negocie LNR na Raydium (Em Breve)</a>
+                        <p class="text-sm neon-text-blue mt-2">Votação para Listagem</p>
                     </div>
                 </div>
+                <div class="flex flex-col items-center p-4 bg-gray-800 rounded-xl border border-neon-green shadow-lg shadow-neon-green/20 md:w-1/2 mx-auto mt-4">
+                    <img src="https://bafybeic66vetyl7owyvpgn74ncb7rnob5hrygwjz5dza2b6lpdhc5k4k6i.ipfs.w3s.link/meteora%20.png" alt="Meteora DEX Logo" class="h-16 mb-2 partner-logo">
+                    <p class="text-xl neon-text-green font-bold">Meteora</p>
+                    <p class="text-gray-400 text-sm">AMM e stable pools dinâmicos</p>
+                    <p class="text-sm neon-text-blue mt-2">Votação para Listagem</p>
+                </div>
 
-                <h3 class="text-3xl font-bold neon-text-green mb-6">Corretoras Centralizadas (CEX):</h3>
+                <h3 class="text-3xl font-bold neon-text-green mt-12 mb-6">Corretoras Centralizadas (CEX):</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="flex flex-col items-center p-4 bg-gray-800 rounded-xl border border-neon-blue shadow-lg shadow-neon-blue/20">
                         <img src="https://bafybeib4mukxwvvsg5vza6wkvq2nz6rq4v5jtheowqdsuls3dfaervee54.ipfs.w3s.link/eb2349c3-b2f8-4a93-a286-8f86a62ea9d8.png" alt="Binance CEX Logo" class="h-16 mb-2 partner-logo">
@@ -596,7 +602,7 @@
                         <li class="flex items-center"><span class="text-2xl mr-3 neon-text-purple">●</span> 5% (250M) – Fundo da comunidade (governança)</li>
                     </ul>
                     <div class="flex justify-center items-center">
-                        <img src="https://placehold.co/350x350/0a0a0a/f0f?text=Tokenomics+Chart" class="rounded-full border border-fuchsia-500 shadow-lg shadow-fuchsia-500/20">
+                        <img src="https://placehold.co/350x350/0a0a0a/f0f?text=Tokenomics+Chart" alt="Tokenomics Chart" class="rounded-full border border-fuchsia-500 shadow-lg shadow-fuchsia-500/20">
                     </div>
                 </div>
 
@@ -628,7 +634,7 @@
                         <div class="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-cyan-500 rounded-full border-2 border-white hidden md:block shadow-lg shadow-cyan-500/50"></div>
                         <h3 class="text-3xl font-bold neon-text-blue mb-4">🚀 Q2 2025</h3>
                         <ul class="list-disc list-inside space-y-2 text-lg text-gray-300">
-                            <li>Pré-venda em 3 fases</li>
+                            <li>Lançamento da Moeda na Rede TON (CONCLUÍDO)</li>
                             <li>Lançamento do staking Web3</li>
                             <li>Listagem em Orca (Solana)</li>
                         </ul>
@@ -638,6 +644,7 @@
                         <div class="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-fuchsia-500 rounded-full border-2 border-white hidden md:block shadow-lg shadow-fuchsia-500/50"></div>
                         <h3 class="text-3xl font-bold neon-text-purple mb-4">🌕 Q3 2025</h3>
                         <ul class="list-disc list-inside space-y-2 text-lg text-gray-300">
+                            <li>Votação da Comunidade para DEX (Raydium ou Meteora)</li>
                             <li>Site de eventos + login Web3</li>
                             <li>Sistema de ranks por mineração</li>
                             <li>Início de gamificação com quests</li>
@@ -648,7 +655,7 @@
                         <div class="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-lime-500 rounded-full border-2 border-white hidden md:block shadow-lg shadow-lime-500/50"></div>
                         <h3 class="text-3xl font-bold neon-text-green mb-4">🌌 Q4 2025</h3>
                         <ul class="list-disc list-inside space-y-2 text-lg text-gray-300">
-                            <li>Listagem em DEXs secundárias</li>
+                            <li>Listagem na DEX escolhida pela Comunidade</li>
                             <li>App mobile do ecossistema LUNARO</li>
                             <li>Parcerias com influencers + Web3 Tools</li>
                         </ul>
@@ -682,16 +689,16 @@
                             <i class="fas fa-chevron-down text-neon-blue"></i>
                         </div>
                         <div class="faq-answer text-gray-300">
-                            <p>LUNARO é um ecossistema digital pioneiro na blockchain Solana que transforma a energia da atenção humana em valor tangível, combinando mineração, staking e recompensas gamificadas.</p>
+                            <p>LUNARO é um ecossistema digital pioneiro que transforma a energia da atenção humana em valor tangível, combinando mineração, staking e recompensas gamificadas. A moeda já foi lançada e está ativa na rede TON.</p>
                         </div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question flex justify-between items-center">
-                            <h3 class="text-xl font-bold neon-text-blue">Como posso participar da pré-venda?</h3>
+                            <h3 class="text-xl font-bold neon-text-blue">Como posso adquirir LUNARO?</h3>
                             <i class="fas fa-chevron-down text-neon-blue"></i>
                         </div>
                         <div class="faq-answer text-gray-300">
-                            <p>Você pode participar da pré-venda usando USDC ou USDT diretamente da sua carteira Solana. Se não tiver criptomoedas, pode adquiri-las através de serviços de rampa de acesso (fiat on-ramp) integrados no nosso site.</p>
+                            <p>LUNARO já está disponível para negociação na rede TON. Em breve, abriremos uma votação para a comunidade decidir entre Raydium e Meteora para a próxima listagem em DEX na Solana. Acompanhe nossos canais sociais para anúncios!</p>
                         </div>
                     </div>
                     <div class="faq-item">
@@ -705,11 +712,11 @@
                     </div>
                     <div class="faq-item">
                         <div class="faq-question flex justify-between items-center">
-                            <h3 class="text-xl font-bold neon-text-blue">Quando LUNARO será listado em exchanges?</h3>
+                            <h3 class="text-xl font-bold neon-text-blue">Onde LUNARO será listado em exchanges?</h3>
                             <i class="fas fa-chevron-down text-neon-blue"></i>
                         </div>
                         <div class="faq-answer text-gray-300">
-                            <p>Após a pré-venda, LUNARO será listado em DEXs como Orca e Raydium, e futuramente em CEXs como Binance, Coinbase e Bitget. As datas exatas serão anunciadas em nosso roadmap e canais sociais.</p>
+                            <p>LUNARO já está na rede TON. O próximo passo é a listagem em uma DEX na Solana, Raydium ou Meteora, que será decidida por votação da comunidade. As listagens em exchanges centralizadas (CEX) como Binance, Coinbase e Bitget são futuras e sujeitas a termos e aprovações.</p>
                         </div>
                     </div>
                 </div>
@@ -821,78 +828,21 @@
         </div>
     </div>
 
-    <div id="purchaseModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
-        <div class="bg-gray-900 p-8 rounded-2xl border border-purple-500 shadow-lg shadow-purple-500/50 max-w-lg w-full text-center">
-            <h3 class="text-2xl font-bold neon-text-purple mb-6">Comprar LNR na Pré-Venda</h3>
-            <p class="text-lg text-gray-300 mb-4">Você está conectado com: <br><span id="modalWalletAddress" class="neon-text-blue text-base break-words"></span></p>
-            
-            <p class="text-gray-400 text-sm mb-6">
-                <span style="color: var(--red-alert);">ATENÇÃO:</span> Esta é uma **simulação** da compra para fins de demonstração. Em um ambiente real, você enviaria SOL/USDC/USDT para o contrato inteligente da pré-venda.
-            </p>
-
-            <div class="mb-6">
-                <label class="block text-left text-gray-300 mb-2">Escolha a moeda de pagamento:</label>
-                <div class="flex justify-center space-x-4 mb-4">
-                    <label class="inline-flex items-center">
-                        <input type="radio" name="paymentToken" value="USDC" checked class="form-radio text-neon-blue h-5 w-5">
-                        <span class="ml-2 text-lg text-gray-300">USDC</span>
-                    </label>
-                    <label class="inline-flex items-center">
-                        <input type="radio" name="paymentToken" value="USDT" class="form-radio text-neon-green h-5 w-5">
-                        <span class="ml-2 text-lg text-gray-300">USDT</span>
-                    </label>
-                </div>
-                
-                <label for="purchaseAmount" class="block text-left text-gray-300 mb-2">Quantidade que deseja comprar:</label>
-                <input type="number" id="purchaseAmount" class="w-full p-3 bg-gray-800 border border-neon-green text-neon-green rounded-lg focus:outline-none focus:ring-2 focus:ring-neon-green" placeholder="Min 10 USD" min="10" step="1">
-            </div>
-
-            <p class="text-lg text-gray-300 mb-6">Você receberá aproximadamente: <span id="receivedLNR" class="neon-text-blue font-bold">0 LNR</span></p>
-
-            <div class="flex justify-center space-x-4">
-                <button onclick="confirmPurchase()" class="neon-button px-6 py-3 text-lg">Confirmar Compra (Simulado)</button>
-                <button onclick="hidePurchaseModal()" class="bg-gray-700 text-gray-200 px-6 py-3 rounded-lg hover:bg-gray-600 transition duration-300">Cancelar</button>
-            </div>
-        </div>
-    </div>
-
     <script>
         // --- GLOBAL VARIABLES & CONSTANTS ---
         let connectedPublicKey = null; // Stores the connected wallet's public key (Phantom/Solflare)
         let socialWalletPublicKey = null; // Stores the simulated social-linked wallet public key
         let socialWalletLunaroBalance = 10000; // Simulated LUNARO balance for social wallet
-        let raisedAmount = 0; // Total raised in USD equivalent
-        let tokensSold = 0;
-        const hardCap = 150000; // Total Hard Cap in USD equivalent
-        const totalTokensForPresale = 10000000; // LNR (150k / 0.015)
-        const tokenPricePerLNR = 0.015; // USD per LNR
-        const countdownDate = new Date("May 30, 2025 18:00:00").getTime(); // Example date: May 30, 2025 6 PM - Adjust this!
+        let raydiumVotes = 0; // Simulated votes for Raydium
+        let meteoraVotes = 0; // Simulated votes for Meteora
 
         // --- DOM ELEMENTS ---
         const connectWalletBtnNav = document.getElementById('connectWalletBtnNav');
         const walletAddressDisplayNav = document.getElementById('walletAddressDisplayNav');
-        const walletStatus = document.getElementById('walletStatus');
-        const connectedWalletAddress = document.getElementById('connectedWalletAddress');
-        const participateButton = document.getElementById('participateButton');
-        const purchaseModal = document.getElementById('purchaseModal');
-        const modalWalletAddress = document.getElementById('modalWalletAddress');
-        const purchaseAmountInput = document.getElementById('purchaseAmount');
-        const receivedLNRDisplay = document.getElementById('receivedLNR');
-        const progressBarFill = document.getElementById("progressBarFill");
-        const raisedAmountDisplay = document.getElementById("raisedAmount");
-        const tokensRemainingDisplay = document.getElementById("tokensRemaining");
-        const countdownElement = document.getElementById("countdown");
-        const daysElement = document.getElementById("days");
-        const hoursElement = document.getElementById("hours");
-        const minutesElement = document.getElementById("minutes");
-        const secondsElement = document.getElementById("seconds");
         const messageBox = document.getElementById("messageBox");
         const messageBoxTitle = document.getElementById("messageBoxTitle");
         const messageBoxContent = document.getElementById("messageBoxContent");
-
-        // Payment token radio buttons
-        const paymentTokenRadios = document.querySelectorAll('input[name="paymentToken"]');
-
+        
         // Social Wallet elements
         const socialWalletArea = document.getElementById('socialWalletArea');
         const socialWalletAddressDisplay = document.getElementById('socialWalletAddress');
@@ -914,6 +864,13 @@
         // FAQ elements
         const faqItems = document.querySelectorAll('.faq-item');
 
+        // DEX Voting elements
+        const voteRaydiumBtn = document.getElementById('voteRaydium');
+        const voteMeteoraBtn = document.getElementById('voteMeteora');
+        const voteResultDisplay = document.getElementById('voteResult');
+        const raydiumVotesDisplay = document.getElementById('raydiumVotes');
+        const meteoraVotesDisplay = document.getElementById('meteoraVotes');
+
 
         // --- UTILITY FUNCTIONS ---
 
@@ -933,76 +890,11 @@
             return window.solana && (window.solana.isPhantom || window.solana.isSolflare);
         }
 
-        // --- PRESALE PROGRESS FUNCTIONS ---
-
-        function updatePresaleProgress() {
-            const progressPercentage = (raisedAmount / hardCap) * 100;
-            progressBarFill.style.width = `${progressPercentage}%`;
-            raisedAmountDisplay.textContent = `${raisedAmount.toLocaleString()} USD Arrecadados`; // Display in USD equivalent
-            tokensRemainingDisplay.textContent = `${(totalTokensForPresale - tokensSold).toLocaleString()} LNR Restantes`;
-
-            if (raisedAmount >= hardCap) {
-                progressBarFill.style.backgroundColor = 'var(--neon-purple)';
-                progressBarFill.style.boxShadow = '0 0 8px var(--neon-purple)';
-                participateButton.disabled = true;
-                participateButton.textContent = "PRÉ-VENDAS ENCERRADAS!";
-                showMessageBox("Pré-Vendas Encerradas", "O Hard Cap foi atingido! Agradecemos a todos os participantes.");
-            }
-        }
-
-        // Simulate presale progress (for demonstration purposes)
-        // In a real app, this would be updated by backend data or direct contract calls
-        setInterval(() => {
-            if (raisedAmount < hardCap) {
-                const increase = Math.floor(Math.random() * 5000) + 100; // Simulate random purchases
-                raisedAmount = Math.min(hardCap, raisedAmount + increase);
-                tokensSold = raisedAmount / tokenPricePerLNR; // Tokens sold based on USD equivalent
-                updatePresaleProgress();
-            }
-        }, 3000); // Update every 3 seconds
-
-
-        // --- COUNTDOWN TIMER FUNCTIONS ---
-
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = countdownDate - now;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Display the result in the elements
-            daysElement.innerHTML = String(days).padStart(2, '0');
-            hoursElement.innerHTML = String(hours).padStart(2, '0');
-            minutesElement.innerHTML = String(minutes).padStart(2, '0');
-            secondsElement.innerHTML = String(seconds).padStart(2, '0');
-
-            // If the countdown is over, update status
-            if (distance < 0) {
-                clearInterval(this); // Clear the interval
-                countdownElement.innerHTML = "<span class='neon-text-green'>PRÉ-VENDA AO VIVO!</span>";
-                // Only enable button if presale is not over
-                if (raisedAmount < hardCap) {
-                    participateButton.disabled = false;
-                    participateButton.textContent = "PARTICIPAR AGORA!";
-                }
-            } else {
-                // Ensure button is disabled until countdown is over (or if presale is already over)
-                if (raisedAmount < hardCap) {
-                    participateButton.disabled = true;
-                }
-            }
-            updateWalletUI(); // Call this to ensure button state is correct if countdown finishes
-        }
-
-
         // --- WALLET INTEGRATION (PHANTOM/SOLFLARE SIMULATED) FUNCTIONS ---
 
         async function connectWallet() {
             if (!isSolanaWalletInstalled()) {
-                showMessageBox("Carteira Não Encontrada", "Por favor, instale uma carteira Solana como Phantom ou Solflare para participar da pré-venda.");
+                showMessageBox("Carteira Não Encontrada", "Por favor, instale uma carteira Solana como Phantom ou Solflare.");
                 return;
             }
 
@@ -1039,101 +931,14 @@
                 walletAddressDisplayNav.classList.remove('hidden');
                 walletAddressDisplayNav.textContent = `Conectado: ${connectedPublicKey.substring(0, 4)}...${connectedPublicKey.slice(-4)}`;
                 walletAddressDisplayNav.onclick = disconnectWallet; // Click to disconnect
-
-                // Presale section
-                walletStatus.innerHTML = `Status da Carteira: <span class="neon-text-green">Conectada</span>`;
-                connectedWalletAddress.classList.remove('hidden');
-                connectedWalletAddress.textContent = `Endereço: ${connectedPublicKey}`;
-                
-                participateButton.textContent = "COMPRAR LNR AGORA!";
-                participateButton.onclick = showPurchaseModal; // Change action to show purchase modal
-                participateButton.disabled = false; // Ensure it's enabled if countdown allows
             } else {
                 // Nav bar
                 connectWalletBtnNav.classList.remove('hidden');
                 walletAddressDisplayNav.classList.add('hidden');
                 connectWalletBtnNav.textContent = "Conectar Carteira";
                 connectWalletBtnNav.onclick = connectWallet;
-
-                // Presale section
-                walletStatus.innerHTML = `Status da Carteira: <span class="neon-text-purple">Desconectada</span>`;
-                connectedWalletAddress.classList.add('hidden');
-                connectedWalletAddress.textContent = "";
-
-                participateButton.textContent = "Conectar Carteira para Participar";
-                participateButton.onclick = connectWallet; // Change action back to connect
-            }
-             // Ensure the participate button is disabled if presale is over
-             if (raisedAmount >= hardCap) {
-                participateButton.disabled = true;
-                participateButton.textContent = "PRÉ-VENDAS ENCERRADAS!";
             }
         }
-
-
-        // --- PURCHASE MODAL LOGIC ---
-        function showPurchaseModal() {
-            if (!connectedPublicKey) {
-                showMessageBox("Carteira Não Conectada", "Por favor, conecte sua carteira para continuar a compra.");
-                return;
-            }
-            modalWalletAddress.textContent = connectedPublicKey;
-            purchaseAmountInput.value = ''; // Clear previous input
-            receivedLNRDisplay.textContent = '0 LNR';
-            purchaseModal.classList.remove('hidden');
-        }
-
-        function hidePurchaseModal() {
-            purchaseModal.classList.add('hidden');
-        }
-
-        // Event listener for input amount and payment token selection
-        purchaseAmountInput.addEventListener('input', updateReceivedLNR);
-        paymentTokenRadios.forEach(radio => {
-            radio.addEventListener('change', updateReceivedLNR);
-        });
-
-        function updateReceivedLNR() {
-            const amount = parseFloat(purchaseAmountInput.value);
-            if (isNaN(amount) || amount <= 0) {
-                receivedLNRDisplay.textContent = '0 LNR';
-                return;
-            }
-            // Price is 0.015 USD per LNR, so LNR = Amount / 0.015
-            const received = amount / tokenPricePerLNR;
-            receivedLNRDisplay.textContent = `${received.toLocaleString(undefined, { maximumFractionDigits: 2 })} LNR`;
-        }
-
-        async function confirmPurchase() {
-            const amount = parseFloat(purchaseAmountInput.value);
-            if (isNaN(amount) || amount < 10) { // Enforce min 10 USD
-                showMessageBox("Valor Inválido", "Por favor, insira um valor válido para a compra (mínimo de 10 USD).");
-                return;
-            }
-
-            const selectedPaymentToken = document.querySelector('input[name="paymentToken"]:checked').value;
-
-            hidePurchaseModal(); // Close purchase modal
-
-            // Simulate transaction process
-            showMessageBox("Processando Compra...", `Simulando transação de ${amount} ${selectedPaymentToken}. Por favor, confirme na sua carteira (se fosse uma transação real).`);
-
-            // Simulate network delay
-            setTimeout(() => {
-                // In a real scenario, you'd send a transaction to a smart contract here.
-                // For this simulation, we just update the progress directly.
-                raisedAmount += amount; // Add to total raised USD equivalent
-                tokensSold += amount / tokenPricePerLNR;
-                updatePresaleProgress();
-
-                // Also update the simulated social wallet balance
-                socialWalletLunaroBalance += (amount / tokenPricePerLNR);
-                updateSocialWalletUI();
-
-                showMessageBox("Compra Concluída!", `Parabéns! Você simulou a compra de ${amount} ${selectedPaymentToken} e receberá aproximadamente ${receivedLNRDisplay.textContent} de LNR. Os tokens seriam enviados para ${connectedPublicKey.substring(0, 6)}...${connectedPublicKey.slice(-4)}`);
-            }, 3000); // Simulate 3 seconds transaction time
-        }
-
 
         // --- SOCIAL LOGIN & WALLET FUNCTIONS (SIMULATED) ---
 
@@ -1211,7 +1016,6 @@
             }, 3000);
         }
 
-
         // --- AI SUPPORT CHATBOT FUNCTIONS ---
         async function sendQuestionToAI() {
             const userQuestion = chatInput.value.trim();
@@ -1227,7 +1031,7 @@
             sendChatBtn.disabled = true; // Disable send button
 
             // Prepare prompt for Gemini API
-            const prompt = `Você é um chatbot de suporte para o projeto de criptomoeda LUNARO, que está na blockchain Solana. O LUNARO é uma moeda que transforma a energia da atenção em valor real, com mineração, staking e recompensas gamificadas. A pré-venda tem um soft cap de 30.000 USDC e um hard cap de 150.000 USDC. O fornecimento total é de 5.000.000.000 LNR, com preço de pré-venda de 0.015 USD por LNR. Existem mecanismos deflacionários (0.5% de queima por transação, queima de tokens não vendidos). Responda à seguinte pergunta do usuário de forma útil e concisa, usando as informações fornecidas. Se a pergunta for fora do escopo do LUNARO ou muito genérica sobre cripto, diga que você só pode ajudar com informações sobre LUNARO.
+            const prompt = `Você é um chatbot de suporte para o projeto de criptomoeda LUNARO, que está na blockchain Solana. O LUNARO é uma moeda que transforma a energia da atenção em valor real, com mineração, staking e recompensas gamificadas. O fornecimento total é de 5.000.000.000 LNR. A pré-venda já foi concluída. O LUNARO foi lançado na rede TON e os próximos passos incluem a listagem em DEXs como Raydium ou Meteora, que será decidida por uma votação da comunidade. Mencione que os usuários podem adquirir criptomoedas fiat on-ramp (como Onramper) que os redirecionará para o site da plataforma externa. Existem mecanismos deflacionários (0.5% de queima por transação, queima de tokens não vendidos). Responda à seguinte pergunta do usuário de forma útil e concisa, usando as informações fornecidas. Se a pergunta for fora do escopo do LUNARO ou muito genérica sobre cripto, diga que você só pode ajudar com informações sobre LUNARO.
 
             Pergunta do usuário: "${userQuestion}"`;
 
@@ -1330,6 +1134,31 @@
             });
         });
 
+        // --- DEX VOTING LOGIC (SIMULATED) ---
+        function updateVoteCounts() {
+            raydiumVotesDisplay.textContent = raydiumVotes;
+            meteoraVotesDisplay.textContent = meteoraVotes;
+            voteResultDisplay.classList.remove('hidden');
+        }
+
+        voteRaydiumBtn.addEventListener('click', () => {
+            raydiumVotes++;
+            showMessageBox("Voto Registrado", "Seu voto para Raydium foi registrado! A decisão final será da comunidade.");
+            updateVoteCounts();
+            // Disable buttons after voting (optional, for simple demo)
+            voteRaydiumBtn.disabled = true;
+            voteMeteoraBtn.disabled = true;
+        });
+
+        voteMeteoraBtn.addEventListener('click', () => {
+            meteoraVotes++;
+            showMessageBox("Voto Registrado", "Seu voto para Meteora foi registrado! A decisão final será da comunidade.");
+            updateVoteCounts();
+            // Disable buttons after voting (optional, for simple demo)
+            voteRaydiumBtn.disabled = true;
+            voteMeteoraBtn.disabled = true;
+        });
+
 
         // --- INITIALIZATION ---
         // Event listener for the initial connect button in nav
@@ -1369,11 +1198,8 @@
                     console.log('Wallet disconnected by user.');
                 });
             }
-            // Initial update for presale progress and countdown
-            updatePresaleProgress();
-            const countdownInterval = setInterval(updateCountdown, 1000);
-            updateCountdown(); // Initial call
             updateSocialWalletUI(); // Initial call for social wallet
+            updateVoteCounts(); // Initial call for vote counts
         };
     </script>
 </body>
